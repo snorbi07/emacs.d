@@ -15,3 +15,29 @@
 
 ;;Key bindings
 (global-set-key [f11] 'toggle-frame-fullscreen)
+
+
+;;Package management
+(setq package-archives
+      '(("gnu" . "http://elpa.gnu.org/packages/")
+	("marmalade" . "http://marmalade-repo.org/packages/")
+	("melpa" . "http://melpa.milkbox.net/packages/")))
+
+;;Packages that I use
+(defvar sram-packages '(
+			;better-defaults
+			;paredit
+			;idle-highlight-mode
+			;ido-ubiquitous
+			;find-file-in-project
+			;magit
+			;smex
+			;scpaste
+			))
+
+;;Install packages that I use if missing
+(package-initialize)
+(dolist (p sram-packages)
+  (when (not (package-installed-p p))
+    (package-install p)))
+
