@@ -15,16 +15,24 @@
 
 ;;Key bindings
 (global-set-key [f11] 'toggle-frame-fullscreen)
+(global-set-key (kbd "M-o") 'other-window)
 
 
 ;;Package management
+;configure the path for local packages
+(add-to-list 'load-path "~/emacs.d/")
+
+;load common function definitions, since those are used everywhere
+(require 'common)
+
+;use additional repositories
 (setq package-archives
       '(("gnu" . "http://elpa.gnu.org/packages/")
 	("marmalade" . "http://marmalade-repo.org/packages/")
 	("melpa" . "http://melpa.milkbox.net/packages/")))
 
-;;Packages that I use
-(defvar sram-packages '(
+;define the default packages that should be installed
+(defvar my-packages '(
 			;better-defaults
 			;paredit
 			;idle-highlight-mode
@@ -35,9 +43,11 @@
 			;scpaste
 			))
 
-;;Install packages that I use if missing
-(package-initialize)
-(dolist (p sram-packages)
-  (when (not (package-installed-p p))
-    (package-install p)))
+(install-if-missing my-packages)
+
+;;Load various configuration extensions
+
+
+
+
 
