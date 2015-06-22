@@ -2,7 +2,7 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (load-theme 'wombat t)
-
+(scroll-bar-mode -1)
 
 ;;Behaviour
 ;disable backup
@@ -18,9 +18,9 @@
 (global-set-key (kbd "M-o") 'other-window)
 
 
-;;Package management
+;;Pddsadackage management
 ;configure the path for local packages
-(add-to-list 'load-path "~/emacs.d/")
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/"))
 
 ;load common function definitions, since those are used everywhere
 (require 'common)
