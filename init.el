@@ -20,7 +20,8 @@
 
 ;;Pddsadackage management
 ;configure the path for local packages
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/core"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/module"))
 
 ;load common function definitions, since those are used everywhere
 (require 'common)
