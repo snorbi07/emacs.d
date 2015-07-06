@@ -4,7 +4,13 @@
 # Packaging
 .cask
 
+# IDO cache
+ido.last
+
 # Ignored directories
 auto-save-list
 eshell
 elpa
+url
+places
+smex-items

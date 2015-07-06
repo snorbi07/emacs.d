@@ -34,13 +34,12 @@
 
 ;define the default packages that should be installed
 (defvar my-packages '(
-			;better-defaults
 			;paredit
-			;idle-highlight-mode
-			;ido-ubiquitous
+			idle-highlight-mode
+			ido-ubiquitous
 			;find-file-in-project
 			;magit
-			;smex
+			smex
 			;scpaste
 			))
 
@@ -48,7 +47,17 @@
 
 ;;Load various configuration extensions
 
+; use ido by default and wherever possible
+(ido-mode 1)
+(ido-everywhere 1)
 
+; use ibuffer by default
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+(autoload 'ibuffer "ibuffer" "List buffers." t)
 
-
+; Smex setup
+(autoload 'smex "smex"
+  "Smex is a M-x enhancement for Emacs, it provides a convenient interface to
+your recently and most frequently used commands.")
+(global-set-key (kbd "M-x") 'smex)
 
