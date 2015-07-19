@@ -20,13 +20,14 @@
 ; http://yousefourabi.com/blog/2014/05/emacs-for-go/
 
 
-(defvar golang-package `(go-mode flycheck company company-go))
+(defvar golang-package `(go-mode flycheck company company-go go-eldoc))
 
 (install-if-missing golang-package)
 
 (add-hook 'go-mode-hook 'flycheck-mode)
 (add-hook 'before-save-hook 'gofmt-before-save)
 (add-hook 'go-mode-hook 'company-mode)
+(add-hook 'go-mode-hook 'go-eldoc-setup)
 
 ; This disables other backends of the company-mode. Potentially screws up other modes! In the long run it might be a better idea to remove this.
 (add-hook 'go-mode-hook (lambda ()
