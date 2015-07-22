@@ -33,3 +33,7 @@
 (add-hook 'go-mode-hook (lambda ()
                           (set (make-local-variable 'company-backends) '(company-go))
                           (company-mode)))
+
+(add-hook 'go-mode-hook (lambda ()
+                          (setq compile-command "go build -v && go test -v && go vet")
+                          (define-key (current-local-map) "\C-c\C-c" 'compile)))
