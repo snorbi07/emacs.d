@@ -35,7 +35,6 @@
 ;define the default packages that should be installed
 (defvar my-packages '(
 			;paredit
-			idle-highlight-mode
 			ido-ubiquitous
 			;find-file-in-project
 			;magit
@@ -61,4 +60,15 @@
 your recently and most frequently used commands.")
 (global-set-key (kbd "M-x") 'smex)
 
+; are we in "the corporate" environment, if yes then load the module
+(cond
+ ((string-equal system-name "ADNLT098")
+  (require 'adnovum)))
+
+; are we running under windows, if yes we need some additional customizations
+(cond
+ ((string-equal system-type "windows-nt")
+  (require 'windows)))
+
+;; Various language specific modules
 (require 'golang)
