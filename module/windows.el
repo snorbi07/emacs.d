@@ -6,3 +6,5 @@
 (setq ispell-program-name "aspell")
 (require 'ispell)
   
+; disable that annoying windows beep
+(setq visible-bell 1)
