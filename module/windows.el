@@ -8,3 +8,10 @@
   
 ; disable that annoying windows beep
 (setq visible-bell 1)
+
+; load tramp and configure it to work with Putty (assuming that Putty is on the PATH)
+(require 'tramp)
+(set-default 'tramp-auto-save-directory "C:/Users/sram/AppData/Local/Temp")
+(set-default 'tramp-default-method "plink")
+
+(setq shell-file-name "bash")
