@@ -14,4 +14,5 @@
 (set-default 'tramp-auto-save-directory "C:/Users/sram/AppData/Local/Temp")
 (set-default 'tramp-default-method "plink")
 
+; this assumes a working cygwin installation on the PATH
 (setq shell-file-name "bash")
