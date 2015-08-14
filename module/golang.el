@@ -10,7 +10,7 @@
 ; go get -u github.com/nsf/gocode
 ; go get code.google.com/p/rog-go/exp/cmd/godef
 ; go get -u github.com/dougm/goflymake
-; 
+; go get github.com/kisielk/errcheck
 
 
 ; References:
@@ -20,7 +20,7 @@
 ; http://yousefourabi.com/blog/2014/05/emacs-for-go/
 
 
-(defvar golang-package `(go-mode flycheck company company-go go-eldoc))
+(defvar golang-package `(go-mode flycheck company company-go go-eldoc go-errcheck))
 
 (install-if-missing golang-package)
 
@@ -37,3 +37,9 @@
 (add-hook 'go-mode-hook (lambda ()
                           (setq compile-command "go build -v && go test -v && go vet")
                           (define-key (current-local-map) "\C-c\C-c" 'compile)))
+
+; add key bindigs
+(add-hook 'go-mode-hook (lambda ()
+                          (local-set-key (kbd "C-c C-k") 'godoc-at-point)
+                          (local-set-key (kbd "M-.") 'godef-jump)))
+
