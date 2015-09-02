@@ -2,21 +2,28 @@
 
 (require 'common)
 
-; References:
-; http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html
+;;; References:
+;;; http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html
+;;; https://truongtx.me/2014/02/23/set-up-javascript-development-environment-in-emacs/
+;;; https://truongtx.me/2014/04/20/emacs-javascript-completion-and-refactoring/
 
-; depends on various external tools, such as:
-; eslint
-; babel-eslint
-; eslint-plugin-react
-; Installable using: npm install -g eslint babel-eslint eslint-plugin-react
-; assuming you have node installed an on your path
+;;; Depends on external tools:
+;;; tern
+;;; eslint
+;;; babel-eslint
+;;; eslint-plugin-react
+;;; Installable using: npm install -g tern eslint babel-eslint eslint-plugin-react
+;;; assuming you have node installed an on your path
 
 (install-if-missing '(flycheck
-		     js2-mode
-		     json-mode
-		     web-mode
-		     exec-path-from-shell))
+                      js2-mode
+                      js2-refactor
+                      json-mode
+                      web-mode
+                      tern
+                      company
+                      company-tern
+                      exec-path-from-shell))
 
 ;; use web-mode for .jsx files
 (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
@@ -40,6 +47,16 @@
   (append flycheck-disabled-checkers
     '(json-jsonlist)))
 
+;; tern setup
+;; add as company mode backend
+(require 'company)
+(add-hook 'js2-mode-hook (lambda () (tern-mode t)))
+(add-to-list 'company-backends 'company-tern)
+
+;; js2-refactor setup
+(require 'js2-refactor)
+(add-hook 'js2-mode-hook #'js2-refactor-mode)
+(js2r-add-keybindings-with-prefix "C-c C-m")
 
 ;; adjust indents for web-mode to 2 spaces
 (defun my-web-mode-hook ()

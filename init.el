@@ -1,3 +1,6 @@
+;;; init.el --- entry point for my custom emacs configuration
+;;; Commentary:
+
 ;;UI configuration
 (tool-bar-mode -1)
 (menu-bar-mode -1)
@@ -72,3 +75,6 @@ your recently and most frequently used commands.")
 
 ;; Various language specific modules
 (require 'golang)
+(require 'javascript)
+(require 'my-elixir)
+;;; init.el ends here
