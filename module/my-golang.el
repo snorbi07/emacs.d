@@ -1,5 +1,3 @@
-(provide 'golang)
-
 (require 'common)
 
 ; We assume that $GOROOT and $GOPATH env. variables are set and are on the $PATH.
@@ -42,4 +40,6 @@
 (add-hook 'go-mode-hook (lambda ()
                           (local-set-key (kbd "C-c C-k") 'godoc-at-point)
                           (local-set-key (kbd "M-.") 'godef-jump)))
+
+(provide 'my-golang)
 

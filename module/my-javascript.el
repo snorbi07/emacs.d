@@ -1,5 +1,3 @@
-(provide 'javascript)
-
 (require 'common)
 
 ;;; References:
@@ -25,8 +23,9 @@
                       company-tern
                       exec-path-from-shell))
 
-;; use web-mode for .jsx files
+;; use js2-mode and web-mode for .js and .jsx files
 (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 ;; http://www.flycheck.org/manual/latest/index.html
 (require 'flycheck)
@@ -50,6 +49,7 @@
 ;; tern setup
 ;; add as company mode backend
 (require 'company)
+(add-hook 'js2-mode-hook 'company-mode)
 (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
 (add-to-list 'company-backends 'company-tern)
 
@@ -66,4 +66,6 @@
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2))
 (add-hook 'web-mode-hook  'my-web-mode-hook)
+
+(provide 'my-javascript)
 

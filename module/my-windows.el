@@ -1,5 +1,3 @@
-(provide 'windows)
-
 ; ispell alternative for windows. Requires a working aspell installation.
 ; for details, check: http://emacswiki.org/emacs/AspellWindows
 (add-to-list 'exec-path "C:/Program Files (x86)/Aspell/bin")
@@ -16,3 +14,6 @@
 
 ; this assumes a working cygwin installation on the PATH
 (setq shell-file-name "bash")
+
+(provide 'my-windows)
+

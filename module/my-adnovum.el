@@ -1,5 +1,3 @@
-(provide 'adnovum)
-
 (setq url-proxy-services '(("https" . "proxy.adnovum.hu:3128")
 			     ("http" . "proxy.adnovum.hu:3128")))
 
@@ -7,3 +5,5 @@
   (interactive)
   (let ((default-directory "/sram@adnvlhu003:"))
     (shell)))
+
+(provide 'my-adnovum)

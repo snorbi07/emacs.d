@@ -7,17 +7,17 @@
 ;;; Code:
 ;;; Initialization:
 
-;;Package management --- configure the path for local packages
+;; Package management --- configure the path for local packages
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/core"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/module"))
 
-;use additional repositories
+;; use additional repositories
 (setq package-archives
       '(("gnu" . "http://elpa.gnu.org/packages/")
 	("marmalade" . "http://marmalade-repo.org/packages/")
 	("melpa" . "http://melpa.milkbox.net/packages/")))
 
-;;load common function definitions, since those are used everywhere
+;; load common function definitions, since those are used everywhere
 (require 'common)
 
 ;; Pre-load section --- scripts that need to be run before starting with the setup/customization. Think of plantform/environment specifict settings, such as proxy configuration.
@@ -30,21 +30,21 @@
 
 ;;; Customizations:
 
-;;UI configuration
+;; UI configuration
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (load-theme 'wombat t)
 (scroll-bar-mode -1)
 
-;;Behaviour
-;;disable backup
+;; Behaviour
+;; disable backup
 (setq backup-inhibited t)
-;;disable auto save
+;; disable auto save
 (setq auto-save-default nil)
-;;disable splash screen stuff
+;; disable splash screen stuff
 (setq inhibit-startup-screen t)
 
-;;Key bindings
+;; General key bindings
 (global-set-key [f11] 'toggle-frame-fullscreen)
 (global-set-key (kbd "M-o") 'other-window)
 
@@ -52,35 +52,39 @@
 
 ;;; Packages:
 
-;define the default packages that should be installed
+;; define the default packages that should be installed
 (defvar my-packages '(
-			;paredit
-			ido-ubiquitous
+                      avy
+                      paredit
+                      ido-ubiquitous
+                      smex
 			;find-file-in-project
 			;magit
-			smex
 			;scpaste
-			))
+                      ))
 
 (install-if-missing my-packages)
 
-;;Load various configuration extensions
+;; Load various configuration extensions
 
-; use ido by default and wherever possible
+;; use ido by default and wherever possible
 (ido-mode 1)
 (ido-everywhere 1)
 (setq ido-enable-flex-matching t)
 
-; use ibuffer by default
+;; use ibuffer by default
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 
-; Smex setup
+;; Smex setup
 (autoload 'smex "smex"
   "Smex is a M-x enhancement for Emacs, it provides a convenient interface to
 your recently and most frequently used commands.")
 (global-set-key (kbd "M-x") 'smex)
 
+;; Avy configuration
+(global-set-key (kbd "C-:") 'avy-goto-char)
+(global-set-key (kbd "M-g f") 'avy-goto-line)
 
 
 ;;; Modules:
@@ -91,7 +95,7 @@ your recently and most frequently used commands.")
   (require 'windows)))
 
 ;; Various language specific modules
-(require 'golang)
-(require 'javascript)
+;; (require 'golang)
+(require 'my-javascript)
 (require 'my-elixir)
 ;;; init.el ends here

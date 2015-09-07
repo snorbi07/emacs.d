@@ -6,6 +6,7 @@
 
 (install-if-missing '(elixir-mode alchemist))
 
+(add-hook 'elixir-mode-hook 'company-mode)
 (add-hook 'elixir-mode-hook (lambda () (alchemist-mode)))
 
 (provide 'my-elixir)
