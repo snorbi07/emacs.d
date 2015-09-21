@@ -24,7 +24,7 @@
 ;; are we in "the corporate" environment, if yes then load the module
 (cond
  ((string-equal system-name "ADNLT098")
-  (require 'adnovum)))
+  (require 'my-adnovum)))
 
 
 
@@ -58,9 +58,7 @@
                       paredit
                       ido-ubiquitous
                       smex
-			;find-file-in-project
-			;magit
-			;scpaste
+		      yaml-mode
                       ))
 
 (install-if-missing my-packages)
@@ -83,7 +81,7 @@ your recently and most frequently used commands.")
 (global-set-key (kbd "M-x") 'smex)
 
 ;; Avy configuration
-(global-set-key (kbd "C-:") 'avy-goto-char)
+(global-set-key (kbd "C-;") 'avy-goto-char)
 (global-set-key (kbd "M-g f") 'avy-goto-line)
 
 
@@ -92,7 +90,7 @@ your recently and most frequently used commands.")
 ;; are we running under windows, if yes we need some additional customizations
 (cond
  ((string-equal system-type "windows-nt")
-  (require 'windows)))
+  (require 'my-windows)))
 
 ;; Various language specific modules
 ;; (require 'golang)
