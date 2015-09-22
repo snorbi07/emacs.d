@@ -18,6 +18,7 @@
 	("melpa" . "http://melpa.milkbox.net/packages/")))
 
 ;; load common function definitions, since those are used everywhere
+;; FIXME(snorbi07): does not follow the my-package naming convention!
 (require 'common)
 
 ;; Pre-load section --- scripts that need to be run before starting with the setup/customization. Think of plantform/environment specifict settings, such as proxy configuration.
@@ -43,6 +44,8 @@
 (setq auto-save-default nil)
 ;; disable splash screen stuff
 (setq inhibit-startup-screen t)
+;; change all promts to 'y' or 'n'
+(fset 'yes-or-no-p 'y-or-n-p)
 
 ;; General key bindings
 (global-set-key [f11] 'toggle-frame-fullscreen)
@@ -54,12 +57,12 @@
 
 ;; define the default packages that should be installed
 (defvar my-packages '(
-                      avy
-                      paredit
-                      ido-ubiquitous
-                      smex
+		      avy
+		      paredit
+		      ido-ubiquitous
+		      smex
 		      yaml-mode
-                      ))
+		      ))
 
 (install-if-missing my-packages)
 
