@@ -62,6 +62,7 @@
 		      ido-ubiquitous
 		      smex
 		      yaml-mode
+		      neotree
 		      ))
 
 (install-if-missing my-packages)
@@ -86,6 +87,10 @@ your recently and most frequently used commands.")
 ;; Avy configuration
 (global-set-key (kbd "C-;") 'avy-goto-char)
 (global-set-key (kbd "M-g f") 'avy-goto-line)
+
+;; Neo-tree setup
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
 
 
 ;;; Modules:

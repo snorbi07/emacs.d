@@ -18,6 +18,7 @@
                       js2-refactor
                       json-mode
                       web-mode
+		      less-css-mode
                       tern
                       company
                       company-tern
