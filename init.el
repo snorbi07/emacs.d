@@ -62,6 +62,7 @@
 		      ido-ubiquitous
 		      smex
 		      yaml-mode
+		      expand-region
 		      ))
 
 (install-if-missing my-packages)
@@ -87,6 +88,8 @@ your recently and most frequently used commands.")
 (global-set-key (kbd "C-:") 'avy-goto-char)
 (global-set-key (kbd "M-g f") 'avy-goto-line)
 
+;; Expande-region configuration
+(global-set-key (kbd "C-=") 'er/expand-region)
 
 ;;; Modules:
 
