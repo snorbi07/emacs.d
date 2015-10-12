@@ -84,6 +84,8 @@
 (helm-mode 1)
 (helm-adaptive-mode 1)
 (helm-push-mark-mode 1)
+(helm-autoresize-mode 1)
+
 (global-set-key (kbd "M-x")                          'undefined)
 (global-set-key (kbd "M-x")                          'helm-M-x)
 (global-set-key (kbd "M-y")                          'helm-show-kill-ring)
