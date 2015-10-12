@@ -69,4 +69,6 @@
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 
 (provide 'my-javascript)
+;;; my-javascript ends here
+
 
