@@ -59,11 +59,13 @@
 (defvar my-packages '(
 		      avy
 		      paredit
-		      ;ido-ubiquitous
-		      smex
 		      yaml-mode
 		      expand-region
 		      helm
+		      smart-mode-line
+		      ;; Currently unused, howere there are commented customizations for these packages:
+		      ;ido-ubiquitous
+		      ;smex
 		      ))
 
 (install-if-missing my-packages)
@@ -136,6 +138,12 @@
 (global-set-key (kbd "C-=") 'er/expand-region)
 
 
+;; Smart-mode-line configuration
+; to avoid the 'loading the theme can run Lisp code' message/question
+(setq custom-safe-themes t)
+(sml/setup)
+(setq sml/theme 'dark)
+
 
 ;;; Modules:
 
@@ -149,3 +157,4 @@
 (require 'my-javascript)
 (require 'my-elixir)
 ;;; init.el ends here
+
