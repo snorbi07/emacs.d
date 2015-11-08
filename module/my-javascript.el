@@ -1,4 +1,9 @@
-(require 'common)
+;;; my-javascript --- module provides support for working with JavaScript
+;;; Commentary:
+
+;;; Code:
+
+(require 'my-common)
 
 ;;; References:
 ;;; http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html
@@ -61,7 +66,7 @@
 
 ;; adjust indents for web-mode to 2 spaces
 (defun my-web-mode-hook ()
-  "Hooks for Web mode. Adjust indents"
+  "Hooks for Web mode.  Adjust indent."
   ;;; http://web-mode.org/
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
@@ -70,5 +75,3 @@
 
 (provide 'my-javascript)
 ;;; my-javascript ends here
-
-

@@ -1,7 +1,10 @@
 ;;; init.el --- entry point for my custom emacs configuration
 ;;; Commentary:
-
-;; TODO - add description
+;;; The init.el file is made up of 4 sections:
+;;; Initializations - set up load paths, remote repository paths and load environment specific configurations.
+;;; Customizations - Look and feel plus key bindings.
+;;; Packages - Load and configure 3rd party packages from Emacs repositories
+;;; Modules - Load personal modules. These usually depend on 3rd party libraries.
 
 
 ;;; Code:
@@ -18,8 +21,7 @@
 	("melpa" . "http://melpa.milkbox.net/packages/")))
 
 ;; load common function definitions, since those are used everywhere
-;; FIXME(snorbi07): does not follow the my-package naming convention!
-(require 'common)
+(require 'my-common)
 
 ;; Pre-load section --- scripts that need to be run before starting with the setup/customization. Think of plantform/environment specifict settings, such as proxy configuration.
 ;; are we in "the corporate" environment, if yes then load the module
@@ -63,6 +65,7 @@
 		      expand-region
 		      helm
 		      smart-mode-line
+                      smartparens
 		      ;; Currently unused, howere there are commented customizations for these packages:
 		      ;ido-ubiquitous
 		      ;smex
@@ -143,6 +146,11 @@
 (setq custom-safe-themes t)
 (sml/setup)
 (setq sml/theme 'dark)
+
+
+;; smartparens configuration
+(require 'smartparens-config)
+
 
 
 ;;; Modules:

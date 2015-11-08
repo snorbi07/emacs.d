@@ -1,4 +1,10 @@
-(require 'common)
+;;; my-golang --- module provides support for working with Go
+;;; Commentary:
+;;; A working installation of go is assumed.
+
+;;; Code:
+
+(require 'my-common)
 
 ; We assume that $GOROOT and $GOPATH env. variables are set and are on the $PATH.
 ; Also it is mandatory to have them on path in order for the CLI tools like godef that are installed using 'go get' work.
@@ -12,7 +18,7 @@
 
 
 ; References:
-; http://dominik.honnef.co/posts/2013/03/writing_go_in_emacs/ 
+; http://dominik.honnef.co/posts/2013/03/writing_go_in_emacs/
 ; http://dominik.honnef.co/posts/2013/08/writing_go_in_emacs__cont__/
 ; http://rz.scale-it.pl/2013/03/04/emacs_on_fly_syntax_checking_for_go_programming_language.htmln
 ; http://yousefourabi.com/blog/2014/05/emacs-for-go/
@@ -42,4 +48,4 @@
                           (local-set-key (kbd "M-.") 'godef-jump)))
 
 (provide 'my-golang)
-
+;;; my-golang.el ends here

@@ -1,5 +1,10 @@
-; ispell alternative for windows. Requires a working aspell installation.
-; for details, check: http://emacswiki.org/emacs/AspellWindows
+;;; my-windows --- module provides support for Windows OS
+;;; Commentary:
+
+;;; Code:
+
+;;; ispell alternative for windows. Requires a working aspell installation.
+;;; for details, check: http://emacswiki.org/emacs/AspellWindows
 (add-to-list 'exec-path "C:/Program Files (x86)/Aspell/bin")
 (setq ispell-program-name "aspell")
 (require 'ispell)
@@ -16,4 +21,4 @@
 (setq shell-file-name "bash")
 
 (provide 'my-windows)
-
+;;; my-windows.el ends here
