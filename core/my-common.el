@@ -4,6 +4,8 @@
 
 ;;; Code:
 
+
+;; FIXME: replace with use-package
 (defun install-if-missing (packages)
   "Install the given list of PACKAGES if missing."
   (package-initialize)

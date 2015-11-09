@@ -10,24 +10,26 @@
 ;;; Code:
 ;;; Initialization:
 
-;; Package management --- configure the path for local packages
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/core"))
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/module"))
+;; Package management --- configure the repository and bootstrap use-package
 
-;; use additional repositories
-(setq package-archives
-      '(("gnu" . "http://elpa.gnu.org/packages/")
-	("marmalade" . "http://marmalade-repo.org/packages/")
-	("melpa" . "http://melpa.milkbox.net/packages/")))
+(require 'package)
+(setq package-enable-at-startup nil)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/"))
+(package-initialize)
 
-;; load common function definitions, since those are used everywhere
-(require 'my-common)
+
+;; Bootstrap `use-package'
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(require 'use-package)
+
 
 ;; Pre-load section --- scripts that need to be run before starting with the setup/customization. Think of plantform/environment specifict settings, such as proxy configuration.
 ;; are we in "the corporate" environment, if yes then load the module
-(cond
- ((string-equal system-name "ADNLT098")
-  (require 'my-adnovum)))
+(use-package my-adnovum
+  :if (string-equal system-name "ADNLT098"))
 
 
 
@@ -71,6 +73,9 @@
 		      ;smex
 		      ))
 
+;; FIXME: this can be removed after the refactoring to use-package has been completed
+(use-package my-common
+  :load-path "core/")
 (install-if-missing my-packages)
 
 ;; Load various configuration extensions
@@ -156,13 +161,14 @@
 ;;; Modules:
 
 ;; are we running under windows, if yes we need some additional customizations
-(cond
- ((string-equal system-type "windows-nt")
-  (require 'my-windows)))
+(use-package  my-windows
+  :if (string-equal system-type "windows-nt"))
+
 
 ;; Various language specific modules
 ;; (require 'golang)
-(require 'my-javascript)
-(require 'my-elixir)
+(use-package my-javascript
+  :load-path "module/")
+(use-package my-elixir
+  :load-path "module/")
 ;;; init.el ends here
-

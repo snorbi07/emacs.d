@@ -3,8 +3,6 @@
 
 ;;; Code:
 
-(require 'my-common)
-
 ;;; References:
 ;;; http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html
 ;;; https://truongtx.me/2014/02/23/set-up-javascript-development-environment-in-emacs/
