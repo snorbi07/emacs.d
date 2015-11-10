@@ -28,6 +28,7 @@
 
 ;; Pre-load section --- scripts that need to be run before starting with the setup/customization. Think of plantform/environment specifict settings, such as proxy configuration.
 ;; are we in "the corporate" environment, if yes then load the module
+;; FIXME: currently this requires manual bootstraping if a proxy configuration is needed to install use-package from melpa
 (use-package my-adnovum
   :if (string-equal system-name "ADNLT098"))
 
@@ -40,6 +41,10 @@
 (menu-bar-mode -1)
 (load-theme 'wombat t)
 (scroll-bar-mode -1)
+
+;; Default fonts
+(custom-set-faces
+ '(default ((t (:family "Consolas" :foundry "outline" :slant normal :weight normal :height 102 :width normal)))))
 
 ;; Behaviour
 ;; disable backup
