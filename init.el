@@ -162,6 +162,14 @@
 (require 'smartparens-config)
 
 
+;; helm-descbinds configuration
+;; Currently not bound to any key so just run the helm-descbinds function
+;; C-z provides a description of the command
+(use-package helm-descbinds
+  :ensure t
+  :config (helm-descbinds-mode))
+  
+
 
 ;;; Modules:
 
