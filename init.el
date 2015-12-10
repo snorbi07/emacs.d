@@ -175,7 +175,13 @@
 (use-package helm-descbinds
   :ensure t
   :config (helm-descbinds-mode))
-  
+
+
+;; emacs-which-key
+;; Pop up to display possible follow up commands
+(use-package helm-descbinds
+  :ensure t
+  :config (which-key-mode))
 
 
 ;;; Modules:
