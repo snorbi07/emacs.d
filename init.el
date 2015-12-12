@@ -179,7 +179,7 @@
 
 ;; emacs-which-key
 ;; Pop up to display possible follow up commands
-(use-package helm-descbinds
+(use-package which-key
   :ensure t
   :config (which-key-mode))
 
