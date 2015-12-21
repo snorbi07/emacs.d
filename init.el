@@ -184,6 +184,24 @@
   :config (which-key-mode))
 
 
+;; projectile used for development tasks
+(use-package projectile
+  :ensure t
+  :diminish projectile-mode
+  :init
+  (setq projectile-enable-caching t
+	projectile-completion-system 'helm)
+  :config
+  (progn (projectile-global-mode)
+	 (helm-projectile-on)))
+
+
+;; helm extension to projectile. use-package makes sure it is installed,
+;; by default the configuration is done in the projectile use-package declaration
+(use-package helm-projectile
+  :ensure t)
+
+
 ;;; Modules:
 
 ;; Various language specific modules

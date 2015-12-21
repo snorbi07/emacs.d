@@ -7,6 +7,10 @@
 # IDO cache
 ido.last
 
+# Projectile cache
+projectile-bookmarks.eld
+projectile.cache
+
 # Ignored directories
 auto-save-list
 eshell
