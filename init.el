@@ -51,7 +51,7 @@
 
 ;; Default fonts
 (custom-set-faces
- '(default ((t (:family "Consolas" :foundry "outline" :slant normal :weight normal :height 102 :width normal)))))
+ '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 98 :width normal)))))
 
 ;; Behaviour
 ;; disable backup
@@ -182,6 +182,11 @@
 (use-package which-key
   :ensure t
   :config (which-key-mode))
+
+
+;; used by projectile
+(use-package helm-ag
+  :ensure t)
 
 
 ;; projectile used for development tasks
