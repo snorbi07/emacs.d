@@ -90,6 +90,10 @@
   :load-path "core/")
 (install-if-missing my-packages)
 
+;; org and related configurations
+(use-package  my-org
+  :load-path "module/")
+
 ;; Load various configuration extensions
 
 
