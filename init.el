@@ -210,13 +210,15 @@
 (use-package helm-projectile
   :ensure t)
 
-
 ;;; Modules:
 
 ;; Various language specific modules
+
 ;; (require 'golang)
 (use-package my-javascript
   :load-path "module/")
 (use-package my-elixir
+  :load-path "module/")
+(use-package my-typescript
   :load-path "module/")
 ;;; init.el ends here
