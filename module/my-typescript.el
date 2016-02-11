@@ -20,7 +20,6 @@
 
 (add-hook 'typescript-mode-hook
           (lambda ()
-	    (message "ANYAD KURVA PICSAJAT")
             (tide-setup)
             (flycheck-mode +1)
             (setq flycheck-check-syntax-automatically '(save mode-enabled))
