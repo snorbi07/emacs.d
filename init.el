@@ -3,8 +3,8 @@
 ;;; The init.el file is made up of 4 sections:
 ;;; Initializations - set up load paths, remote repository paths and load environment specific configurations.
 ;;; Customizations - Look and feel plus key bindings.
-;;; Packages - Load and configure 3rd party packages from Emacs repositories
-;;; Modules - Load personal modules. These usually depend on 3rd party libraries.
+;;; Packages - Load and configure 3rd party packages from Emacs repositories.
+;;; Modules - Load personal modules, these usually depend on 3rd party libraries.
 
 
 ;;; Code:
@@ -222,6 +222,22 @@
 
 (use-package magit
   :ensure t)
+
+
+(use-package highlight-symbol
+  :ensure t
+  :init 
+  (add-hook 'prog-mode-hook
+            (lambda()
+              (highlight-symbol-mode 1)))
+  (add-hook 'prog-mode-hook
+            (lambda()
+              (highlight-symbol-nav-mode 1)))
+  :config
+  (setq highlight-symbol-idle-delay 1.0
+        highlight-symbol-on-navigation-p t)
+  :diminish highlight-symbol-mode)
+
 
 ;;; Modules:
 
