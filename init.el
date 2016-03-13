@@ -1,4 +1,4 @@
-;;; init.el --- entry point for my custom emacs configuration
+;;; Init.el --- entry point for my custom emacs configuration
 ;;; Commentary:
 ;;; The init.el file is made up of 4 sections:
 ;;; Initializations - set up load paths, remote repository paths and load environment specific configurations.
@@ -210,6 +210,15 @@
 (use-package helm-projectile
   :ensure t)
 
+
+(use-package neotree
+  :ensure t
+  :config
+  (setq projectile-switch-project-action 'neotree-projectile-action
+	neo-smart-open t)
+  :bind
+  ([f8] . neotree-toggle))
+
 ;;; Modules:
 
 ;; Various language specific modules
@@ -219,6 +228,6 @@
   :load-path "module/")
 (use-package my-elixir
   :load-path "module/")
-(use-package my-typescript
-  :load-path "module/")
+;;(use-package my-typescript
+;;  :load-path "module/")
 ;;; init.el ends here
