@@ -219,6 +219,10 @@
   :bind
   ([f8] . neotree-toggle))
 
+
+(use-package magit
+  :ensure t)
+
 ;;; Modules:
 
 ;; Various language specific modules
