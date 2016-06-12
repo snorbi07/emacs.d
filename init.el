@@ -189,8 +189,29 @@
 
 
 ;; used by projectile
+(use-package ag
+  :ensure t)
+
+
+;; used by projectile
 (use-package helm-ag
   :ensure t)
+
+
+;; helm extension to projectile. use-package makes sure it is installed,
+;; by default the configuration is done in the projectile use-package declaration
+(use-package helm-projectile
+  :ensure t
+  :after helm
+  ;;; Workaround for issue: https://github.com/bbatsov/helm-projectile/issues/30
+  :bind
+  (:map projectile-command-map
+        ("b" . helm-projectile-switch-to-buffer)
+        ("d" . helm-projectile-find-dir)
+        ("f" . helm-projectile-find-file)
+        ("p" . helm-projectile-switch-project)
+        ("s s" . helm-projectile-ag))
+  :config (helm-projectile-toggle 1))
 
 
 ;; projectile used for development tasks
@@ -203,12 +224,6 @@
   :config
   (progn (projectile-global-mode)
 	 (helm-projectile-on)))
-
-
-;; helm extension to projectile. use-package makes sure it is installed,
-;; by default the configuration is done in the projectile use-package declaration
-(use-package helm-projectile
-  :ensure t)
 
 
 (use-package neotree
@@ -237,6 +252,12 @@
   (setq highlight-symbol-idle-delay 1.0
         highlight-symbol-on-navigation-p t)
   :diminish highlight-symbol-mode)
+
+
+(use-package markdown-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)))
 
 
 ;;; Modules:
