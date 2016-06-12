@@ -241,7 +241,7 @@
 
 (use-package highlight-symbol
   :ensure t
-  :init 
+  :init
   (add-hook 'prog-mode-hook
             (lambda()
               (highlight-symbol-mode 1)))
@@ -266,6 +266,8 @@
 
 ;; (require 'golang)
 (use-package my-javascript
+  :load-path "module/")
+(use-package my-java
   :load-path "module/")
 (use-package my-elixir
   :load-path "module/")

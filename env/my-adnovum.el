@@ -1,4 +1,4 @@
-;;; my-adnovul --- module provides support for working in AdNovum's corporate environment
+;;; my-adnovum --- module provides support for working in AdNovum's corporate environment
 ;;; Commentary:
 
 ;;; Code:
