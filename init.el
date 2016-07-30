@@ -1,4 +1,4 @@
-;;; Init.el --- entry point for my custom emacs configuration
+ ;;; Init.el --- entry point for my custom emacs configuration
 ;;; Commentary:
 ;;; The init.el file is made up of 4 sections:
 ;;; Initializations - set up load paths, remote repository paths and load environment specific configurations.
@@ -41,136 +41,92 @@
 
 
 
-;;; Customizations:
-
-;; UI configuration
-(tool-bar-mode -1)
-(menu-bar-mode -1)
-(load-theme 'wombat t)
-(scroll-bar-mode -1)
-
-;; Default fonts
-(custom-set-faces
- '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 98 :width normal)))))
-
-;; Behaviour
-;; disable backup
-(setq backup-inhibited t)
-;; disable auto save
-(setq auto-save-default nil)
-;; disable splash screen stuff
-(setq inhibit-startup-screen t)
-;; change all promts to 'y' or 'n'
-(fset 'yes-or-no-p 'y-or-n-p)
-
-;; General key bindings
-(global-set-key [f11] 'toggle-frame-fullscreen)
-(global-set-key (kbd "M-o") 'other-window)
-
-
-
 ;;; Packages:
-
-;; define the default packages that should be installed
-(defvar my-packages '(
-		      avy
-		      paredit
-		      yaml-mode
-		      expand-region
-		      helm
-		      smart-mode-line
-                      smartparens
-		      ;; Currently unused, howere there are commented customizations for these packages:
-		      ;ido-ubiquitous
-		      ;smex
-		      ))
 
 ;; FIXME: this can be removed after the refactoring to use-package has been completed
 (use-package my-common
   :load-path "core/")
-(install-if-missing my-packages)
 
-;; org and related configurations
-(use-package  my-org
+(use-package my-misc
   :load-path "module/")
 
-;; Load various configuration extensions
+
+(use-package smart-mode-line
+  :ensure t
+  :config (progn
+	    ; to avoid the 'loading the theme can run Lisp code' message/question
+	    (setq custom-safe-themes t)
+	    (sml/setup)
+	    (setq sml/theme 'dark)))
 
 
-;; Ido specific settings
-;; To get started with ido, the package needs to be uncommented in the my-packages list.
-;; Use ido by default and wherever possible
-;; (ido-mode 1)
-;; (ido-everywhere 1)
-;; (setq ido-enable-flex-matching t)
+(use-package avy
+  :ensure t)
 
 
-;; Helm specific settings
-(require 'helm-config)
-(helm-mode 1)
-(helm-adaptive-mode 1)
-(helm-push-mark-mode 1)
-(helm-autoresize-mode 1)
-
-(global-set-key (kbd "M-x")                          'undefined)
-(global-set-key (kbd "M-x")                          'helm-M-x)
-(global-set-key (kbd "M-y")                          'helm-show-kill-ring)
-(global-set-key (kbd "C-c f")                        'helm-recentf)
-(global-set-key (kbd "C-x C-f")                      'helm-find-files)
-(global-set-key (kbd "C-c <SPC>")                    'helm-all-mark-rings)
-(global-set-key (kbd "C-x r b")                      'helm-filtered-bookmarks)
-(global-set-key (kbd "C-h r")                        'helm-info-emacs)
-(global-set-key (kbd "C-:")                          'helm-eval-expression-with-eldoc)
-(global-set-key (kbd "C-,")                          'helm-calcul-expression)
-(global-set-key (kbd "C-h i")                        'helm-info-at-point)
-(global-set-key (kbd "C-x C-d")                      'helm-browse-project)
-(global-set-key (kbd "<f1>")                         'helm-resume)
-(global-set-key (kbd "C-h C-f")                      'helm-apropos)
-(global-set-key (kbd "<f5> s")                       'helm-find)
-(global-set-key (kbd "<f2>")                         'helm-execute-kmacro)
-(global-set-key (kbd "C-c g")                        'helm-gid)
-(global-set-key (kbd "C-c i")                        'helm-imenu-in-all-buffers)
-(global-set-key (kbd "C-s")                          'helm-occur)
-(define-key global-map [remap jump-to-register]      'helm-register)
-(define-key global-map [remap list-buffers]          'helm-buffers-list)
-(define-key global-map [remap dabbrev-expand]        'helm-dabbrev)
-(define-key global-map [remap find-tag]              'helm-etags-select)
-(define-key global-map [remap xref-find-definitions] 'helm-etags-select)
-(define-key global-map (kbd "M-g a")                 'helm-do-grep-ag)
+(use-package key-chord
+  :ensure t
+  :after avy
+  :config
+  (progn
+    (message "hello darkness my old friend1")
+    (setq key-chord-one-key-delay 0.17)
+    (key-chord-mode 1)
+    (key-chord-define-global "jj"     'avy-goto-char)
+    (key-chord-define-global "jw"     'avy-goto-word-1)
+    (key-chord-define-global "jl"     'avy-goto-line)))
 
 
-;; ibuffer specific settings
-;; To get started, uncomment the following lines. By default, helm-buffers-list is used instead.
-;; (global-set-key (kbd "C-x C-b") 'ibuffer)
-;; (autoload 'ibuffer "ibuffer" "List buffers." t)
+(use-package paredit
+  :defer t
+  :ensure t)
 
 
-;; Smex specific settings
-;; To enable it, uncomment the following lines. Bt default, helm-M-x is used instead.
-;; (autoload 'smex "smex"
-;;   "Smex is a M-x enhancement for Emacs, it provides a convenient interface to
-;; your recently and most frequently used commands.")
-;; (global-set-key (kbd "M-x") 'smex)
+(use-package yaml-mode
+  :defer t
+  :ensure t)
 
 
-;; Avy configuration
-(global-set-key (kbd "C-:") 'avy-goto-char)
-(global-set-key (kbd "M-g f") 'avy-goto-line)
+(use-package helm
+  :ensure t
+  :init
+  (progn
+    (require 'helm-config)
+    (helm-adaptive-mode 1)
+    (helm-push-mark-mode 1)
+    (helm-autoresize-mode 1)
+    (helm-adaptive-mode 1)
+    (helm-mode 1))
+  :bind (("M-x" . helm-M-x)
+	 ("M-y" . helm-show-kill-ring)
+	 ("C-c f" . helm-recentf)
+	 ("C-x C-f" . helm-find-files)
+	 ("C-c SPC" . helm-all-mark-rings)
+	 ("C-x r b" . helm-filtered-bookmarks)
+	 ("C-h r" . helm-info-emacs)
+	 ("C-," . helm-calcul-expression)
+	 ("C-h i" . helm-info-at-point)
+	 ("C-x C-d" . helm-browse-project)
+	 ("C-h C-f" . helm-apropos)
+	 ("C-c i" . helm-imenu-in-all-buffers)
+	 ("C-s" . helm-occur)
+	 ("M-g a" . helm-do-grep-ag)
+	 ([remap jump-to-register] . helm-register)
+	 ([remap list-buffers] . helm-buffers-list)
+	 ([remap dabbrev-expand] . helm-dabbrev)
+	 ([remap find-tag] . helm-etags-select)
+	 ([remap xref-find-definitions] . helm-etags-select)))
 
 
-;; Expande-region configuration
-(global-set-key (kbd "C-=") 'er/expand-region)
+(use-package expand-region
+  :defer t
+  :bind ("C-=" . er/expand-region))
 
 
-;; Smart-mode-line configuration
-; to avoid the 'loading the theme can run Lisp code' message/question
-(setq custom-safe-themes t)
-(sml/setup)
-(setq sml/theme 'dark)
-
-
-;; smartparens configuration
-(require 'smartparens-config)
+(use-package smartparens
+  :config
+  (progn
+    (require 'smartparens-config)))
 
 
 ;; helm-descbinds configuration
@@ -190,11 +146,13 @@
 
 ;; used by projectile
 (use-package ag
+  :after helm
   :ensure t)
 
 
 ;; used by projectile
 (use-package helm-ag
+  :after helm
   :ensure t)
 
 
@@ -217,6 +175,7 @@
 ;; projectile used for development tasks
 (use-package projectile
   :ensure t
+  :defer t
   :diminish projectile-mode
   :init
   (setq projectile-enable-caching t
@@ -256,21 +215,25 @@
 
 (use-package markdown-mode
   :ensure t
+  :defer t
   :config
   (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)))
 
 
-;;; Modules:
-
-;; Various language specific modules
+;;; My Modules:
 
 ;; (require 'golang)
 (use-package my-javascript
   :load-path "module/")
-(use-package my-java
-  :load-path "module/")
+;;(use-package my-java
+;;  :load-path "module/")
 (use-package my-elixir
   :load-path "module/")
 ;;(use-package my-typescript
 ;;  :load-path "module/")
 ;;; init.el ends here
+
+
+;; org and related configurations
+(use-package  my-org
+  :load-path "module/")
