@@ -222,6 +222,10 @@
 
 ;;; My Modules:
 
+;; org and related configurations
+(use-package  my-org
+  :load-path "module/")
+
 ;; (require 'golang)
 (use-package my-javascript
   :load-path "module/")
@@ -232,8 +236,3 @@
 ;;(use-package my-typescript
 ;;  :load-path "module/")
 ;;; init.el ends here
-
-
-;; org and related configurations
-(use-package  my-org
-  :load-path "module/")

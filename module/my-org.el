@@ -3,18 +3,11 @@
 ;;; Add reusable functions to this file
 
 ;;; Code:
-(require 'org)
-(require 'org-capture)
 
-; set up capture support for taking random notes effortlessly
-(setq org-default-notes-file (concat org-directory "/notes.org"))
-(define-key global-map "\C-cc" 'org-capture)
-
-(setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/org/gtd.org" "Tasks")
-	 "* TODO %?\n  %i\n  %a")
-        ("j" "Journal" entry (file+datetree "~/org/journal.org")
-	 "* %?\nEntered on %U\n  %i\n  %a")))
+(use-package org
+  :ensure t
+  :bind (("C-c o a" . org-agenda))
+  :config (setq org-agenda-files (list "~/Documents/org")))
 
 (provide 'my-org)
 ;;; my-org.el ends here
