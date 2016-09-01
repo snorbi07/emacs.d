@@ -1,4 +1,4 @@
- ;;; Init.el --- entry point for my custom emacs configuration
+;;; Init.el --- entry point for my custom emacs configuration
 ;;; Commentary:
 ;;; The init.el file is made up of 4 sections:
 ;;; Initializations - set up load paths, remote repository paths and load environment specific configurations.
@@ -69,7 +69,6 @@
   :after avy
   :config
   (progn
-    (message "hello darkness my old friend1")
     (setq key-chord-one-key-delay 0.17)
     (key-chord-mode 1)
     (key-chord-define-global "jj"     'avy-goto-char)
@@ -78,8 +77,12 @@
 
 
 (use-package paredit
-  :defer t
-  :ensure t)
+  :ensure t
+  :config (progn
+	    (add-hook 'emacs-lisp-mode-hook       'enable-paredit-mode)
+	    (add-hook 'lisp-mode-hook             'enable-paredit-mode)
+	    (add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
+	    (add-hook 'scheme-mode-hook           'enable-paredit-mode)))
 
 
 (use-package yaml-mode
@@ -89,7 +92,8 @@
 
 (use-package helm
   :ensure t
-  :init
+  :defer t
+  :config
   (progn
     (require 'helm-config)
     (helm-adaptive-mode 1)
@@ -177,12 +181,12 @@
   :ensure t
   :defer t
   :diminish projectile-mode
-  :init
-  (setq projectile-enable-caching t
-	projectile-completion-system 'helm)
   :config
-  (progn (projectile-global-mode)
-	 (helm-projectile-on)))
+  (progn
+    (setq projectile-enable-caching t
+	  projectile-completion-system 'helm)
+    (projectile-global-mode)
+    (helm-projectile-on)))
 
 
 (use-package neotree
@@ -201,16 +205,17 @@
 
 (use-package highlight-symbol
   :ensure t
-  :init
-  (add-hook 'prog-mode-hook
-            (lambda()
-              (highlight-symbol-mode 1)))
-  (add-hook 'prog-mode-hook
-            (lambda()
-              (highlight-symbol-nav-mode 1)))
   :config
-  (setq highlight-symbol-idle-delay 1.0
-        highlight-symbol-on-navigation-p t)
+  (progn 
+    (add-hook 'prog-mode-hook
+	      (lambda()
+		(highlight-symbol-mode 1)))
+    (add-hook 'prog-mode-hook
+	      (lambda()
+		(highlight-symbol-nav-mode 1)))
+
+    (setq highlight-symbol-idle-delay 1.0
+	  highlight-symbol-on-navigation-p t))
   :diminish highlight-symbol-mode)
 
 
@@ -219,6 +224,14 @@
   :defer t
   :config
   (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)))
+
+
+(use-package company
+  :ensure t
+  :defer t
+  :config (add-hook 'prog-mode-hook 'global-company-mode))
+
+
 
 
 ;;; My Modules:
