@@ -13,9 +13,9 @@
 
 ;; Default fonts
 (custom-set-faces
- '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 98 :width normal)))))
+ '(default ((t (:family "Source Code Pro" :foundry "ADBO" :slant normal :weight semi-bold :height 98 :width normal)))))
 
-;; Behaviour
+;; Behavior
 ;; disable backup
 (setq backup-inhibited t)
 ;; disable auto save
@@ -26,7 +26,10 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 ;; disable annoying "beep" sound
 (setq visible-bell t)
-
+;; display the current time
+(display-time-mode)
+;; don't start in prog-mode by default, this way we achieve a faster startup time because prog-mode has various hooks associated with it.
+(setq initial-major-mode 'text-mode)
 
 ;; General key bindings
 (global-set-key [f11] 'toggle-frame-fullscreen)
