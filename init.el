@@ -58,6 +58,11 @@
   :ensure t)
 
 
+(use-package ace-window
+  :ensure t
+  :bind ("M-o" . ace-window))
+
+
 (use-package key-chord
   :ensure t
   :after avy
@@ -155,6 +160,7 @@
 
 
 (use-package smartparens
+  :ensure t
   :config
   (progn
     (require 'smartparens-config)

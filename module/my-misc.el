@@ -33,7 +33,6 @@
 
 ;; General key bindings
 (global-set-key [f11] 'toggle-frame-fullscreen)
-(global-set-key (kbd "M-o") 'other-window)
 
 
 (provide 'my-misc)
