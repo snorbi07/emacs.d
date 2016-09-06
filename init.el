@@ -239,6 +239,41 @@
       :config (company-quickhelp-mode t))))
 
 
+(use-package yasnippet
+  :ensure t
+  :commands (yas-minor-mode)
+  :init
+  (add-hook 'prog-mode-hook #'yas-minor-mode)
+  :config 
+  (yas-reload-all))
+
+
+(use-package elixir-mode
+  :ensure t
+  :defer t
+  :commands elixir-mode
+  :init
+  (add-hook 'elixir-mode-hook #'alchemist-mode-hook)
+  :config
+  (progn
+    (use-package alchemist
+      :ensure t)
+    ;;FIXME: seems to have an issue with buffer path, similarly to:
+    ;; https://github.com/mpenet/clojure-snippets/pull/7
+    ;; https://github.com/syl20bnr/spacemacs/issues/5373
+    ;;  (use-package elixir-yasnippets
+    ;;  :ensure t)
+    ;; To reproduce: after starting up emacs create an elixir buffer, an error will be displayed. If another prog-mode one is triggered beforehand it works.
+    (sp-with-modes '(elixir-mode)
+      (sp-local-pair "fn" "end"
+    		     :when '(("SPC" "RET"))
+    		     :actions '(insert navigate))
+      (sp-local-pair "do" "end"
+    		     :when '(("SPC" "RET"))
+    		     :post-handlers '(sp-ruby-def-post-handler)
+    		     :actions '(insert navigate)))))
+
+
 ;; enable spell checking during coding as well, since I cannot spell properly anyways.
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
