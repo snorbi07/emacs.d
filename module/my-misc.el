@@ -30,6 +30,8 @@
 (display-time-mode)
 ;; don't start in prog-mode by default, this way we achieve a faster startup time because prog-mode has various hooks associated with it.
 (setq initial-major-mode 'text-mode)
+;; disable window narrowing/widening message
+(put 'narrow-to-region 'disabled nil)
 
 ;; General key bindings
 (global-set-key [f11] 'toggle-frame-fullscreen)
