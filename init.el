@@ -58,21 +58,26 @@
   :ensure t)
 
 
-(use-package ace-window
-  :ensure t
-  :bind ("M-o" . ace-window))
+(use-package imenu-anywhere
+  :ensure t)
 
 
 (use-package key-chord
   :ensure t
-  :after avy
+  :after avy imenu-anywhere
   :config
   (progn
-    (setq key-chord-one-key-delay 0.17)
+    (setq key-chord-one-key-delay 0.20)
     (key-chord-mode 1)
-    (key-chord-define-global "jj"     'avy-goto-char)
-    (key-chord-define-global "jw"     'avy-goto-word-1)
-    (key-chord-define-global "jl"     'avy-goto-line)))
+    (key-chord-define-global "jj" 'avy-goto-char)
+    (key-chord-define-global "jw" 'avy-goto-word-1)
+    (key-chord-define-global "jl" 'avy-goto-line)
+    (key-chord-define-global "js" 'helm-imenu-anywhere)))
+
+
+(use-package ace-window
+  :ensure t
+  :bind ("M-o" . ace-window))
 
 
 (use-package paredit
