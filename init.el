@@ -62,6 +62,12 @@
   :ensure t)
 
 
+(use-package undo-tree
+  :ensure t
+  :config
+  (global-undo-tree-mode))
+
+
 (use-package key-chord
   :ensure t
   :after avy imenu-anywhere
