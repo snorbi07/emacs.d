@@ -282,7 +282,10 @@
       (sp-local-pair "do" "end"
     		     :when '(("SPC" "RET"))
     		     :post-handlers '(sp-ruby-def-post-handler)
-    		     :actions '(insert navigate)))))
+    		     :actions '(insert navigate)))
+    (use-package flycheck-elixir
+      :ensure t
+      :init (add-hook 'elixir-mode-hook #'flycheck-mode))))
 
 
 ;; enable spell checking during coding as well, since I cannot spell properly anyways.
