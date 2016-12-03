@@ -45,6 +45,13 @@
   :load-path "module/")
 
 
+(use-package crux
+  :ensure t
+  :bind (("S-<return>" . crux-smart-open-line)
+	 ("C-c I" . crux-find-user-init-file)
+	 ("C-<backspace>" . crux-kill-line-backwards)))
+
+
 (use-package smart-mode-line
   :ensure t
   :config (progn
@@ -266,6 +273,7 @@
   :init
   (progn
     (add-hook 'elixir-mode-hook #'flycheck-mode)
+    (add-hook 'elixir-mode-hook #'subword-mode)
     (add-hook 'elixir-mode-hook #'alchemist-mode-hook))
   :config
   (progn
