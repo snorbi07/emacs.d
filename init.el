@@ -85,7 +85,7 @@
     (key-chord-define-global "jj" 'avy-goto-char)
     (key-chord-define-global "jw" 'avy-goto-word-1)
     (key-chord-define-global "jl" 'avy-goto-line)
-    (key-chord-define-global "js" 'helm-imenu-anywhere)))
+    (key-chord-define-global "jz" 'helm-imenu-anywhere)))
 
 
 (use-package ace-window
