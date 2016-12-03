@@ -264,7 +264,9 @@
   :defer t
   :commands elixir-mode
   :init
-  (add-hook 'elixir-mode-hook #'alchemist-mode-hook)
+  (progn
+    (add-hook 'elixir-mode-hook #'flycheck-mode)
+    (add-hook 'elixir-mode-hook #'alchemist-mode-hook))
   :config
   (progn
     (use-package alchemist
@@ -283,9 +285,9 @@
     		     :when '(("SPC" "RET"))
     		     :post-handlers '(sp-ruby-def-post-handler)
     		     :actions '(insert navigate)))
-    (use-package flycheck-elixir
+    (use-package flycheck-mix
       :ensure t
-      :init (add-hook 'elixir-mode-hook #'flycheck-mode))))
+      :init (add-hook 'elixir-mode-hook 'flycheck-mix-setup))))
 
 
 ;; enable spell checking during coding as well, since I cannot spell properly anyways.
