@@ -247,6 +247,11 @@
   (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)))
 
 
+(use-package flycheck
+  :ensure t
+  :config (global-flycheck-mode))
+
+
 (use-package company
   :ensure t
   :config
@@ -262,8 +267,35 @@
   :commands (yas-minor-mode)
   :init
   (add-hook 'prog-mode-hook #'yas-minor-mode)
-  :config 
-  (yas-reload-all))
+  :config (yas-reload-all))
+
+
+;; Python development setup
+(use-package anaconda-mode
+  :ensure t
+  :init
+  (progn
+    (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+    (add-hook 'python-mode-hook 'anaconda-mode))
+  :config
+  (progn
+    (use-package flycheck-pyflakes
+      :ensure t)
+    (use-package company-anaconda
+      :ensure t
+      :init (add-to-list 'company-backends '(company-anaconda :with company-capf)))
+    (use-package pyenv-mode
+      :ensure t
+      :init (pyenv-mode)
+      :config
+      (progn
+	(defun projectile-pyenv-mode-set ()
+	  "Set pyenv version matching project name."
+	  (let ((project (projectile-project-name)))
+	    (if (member project (pyenv-mode-versions))
+		(pyenv-mode-set project)
+	      (pyenv-mode-unset))))
+	(add-hook 'projectile-switch-project-hook 'projectile-pyenv-mode-set)))))
 
 
 (use-package elixir-mode
@@ -299,7 +331,8 @@
 
 
 ;; enable spell checking during coding as well, since I cannot spell properly anyways.
-(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+;; FIXME: disabled since it conflicts with C-M-i binding of company by default
+;;(add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
 
 ;;; My Modules:

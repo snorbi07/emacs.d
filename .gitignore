@@ -12,6 +12,7 @@ projectile-bookmarks.eld
 projectile.cache
 
 # Ignored directories
+anaconda-mode
 auto-save-list
 eshell
 elpa
