@@ -286,7 +286,7 @@
       :init (add-to-list 'company-backends '(company-anaconda :with company-capf)))
     (use-package pyenv-mode
       :ensure t
-      :init (pyenv-mode)
+      :init (add-hook 'python-mode-hook 'pyenv-mode)
       :config
       (progn
 	(defun projectile-pyenv-mode-set ()
@@ -295,7 +295,9 @@
 	    (if (member project (pyenv-mode-versions))
 		(pyenv-mode-set project)
 	      (pyenv-mode-unset))))
-	(add-hook 'projectile-switch-project-hook 'projectile-pyenv-mode-set)))))
+	(add-hook 'projectile-switch-project-hook 'projectile-pyenv-mode-set)
+        ; disable the global mapping introduced by pyenv, since it conflicts with other modes such as org-agenda-scheduel
+	(define-key pyenv-mode-map (kbd "C-c C-s") nil)))))
 
 
 (use-package elixir-mode
