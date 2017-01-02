@@ -128,6 +128,10 @@
       :ensure t
       :config (helm-descbinds-mode))
 
+    (use-package helm-swoop
+      :ensure t
+      :bind (("C-s" . helm-swoop)))
+
     ;; used by projectile
     (use-package helm-ag
       :ensure t
@@ -163,7 +167,6 @@
    ("C-x C-d" . helm-browse-project)
    ("C-h C-f" . helm-apropos)
    ("C-c i" . helm-imenu-in-all-buffers)
-   ("C-s" . helm-occur)
    ("M-g a" . helm-do-grep-ag)
    ([remap jump-to-register] . helm-register)
    ([remap list-buffers] . helm-buffers-list)
