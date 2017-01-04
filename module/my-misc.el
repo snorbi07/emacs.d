@@ -8,8 +8,11 @@
 ; UI configuration
 (tool-bar-mode -1)
 (menu-bar-mode -1)
-(load-theme 'wombat t)
 (scroll-bar-mode -1)
+
+(use-package idea-darkula-theme
+  :ensure t
+  :init (load-theme 'idea-darkula t))
 
 ;; Default fonts
 (custom-set-faces
