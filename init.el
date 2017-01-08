@@ -274,33 +274,38 @@
 
 
 ;; Python development setup
-(use-package anaconda-mode
+(use-package elpy
   :ensure t
-  :init
-  (progn
-    (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
-    (add-hook 'python-mode-hook 'anaconda-mode))
-  :config
-  (progn
-    (use-package flycheck-pyflakes
-      :ensure t)
-    (use-package company-anaconda
-      :ensure t
-      :init (add-to-list 'company-backends '(company-anaconda :with company-capf)))
-    (use-package pyenv-mode
-      :ensure t
-      :init (add-hook 'python-mode-hook 'pyenv-mode)
-      :config
-      (progn
-	(defun projectile-pyenv-mode-set ()
-	  "Set pyenv version matching project name."
-	  (let ((project (projectile-project-name)))
-	    (if (member project (pyenv-mode-versions))
-		(pyenv-mode-set project)
-	      (pyenv-mode-unset))))
-	(add-hook 'projectile-switch-project-hook 'projectile-pyenv-mode-set)
-        ; disable the global mapping introduced by pyenv, since it conflicts with other modes such as org-agenda-scheduel
-	(define-key pyenv-mode-map (kbd "C-c C-s") nil)))))
+  :init (elpy-enable))
+
+;; Anaconda based Python support, disabled because of elpy usage
+;(use-package anaconda-mode
+;  :ensure t
+;  :init
+;  (progn
+;    (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+;    (add-hook 'python-mode-hook 'anaconda-mode))
+;  :config
+;  (progn
+;    (use-package flycheck-pyflakes
+;      :ensure t)
+;    (use-package company-anaconda
+;      :ensure t
+;      :init (add-to-list 'company-backends '(company-anaconda :with company-capf)))
+;    (use-package pyenv-mode
+;      :ensure t
+;      :init (add-hook 'python-mode-hook 'pyenv-mode)
+;      :config
+;      (progn
+;	(defun projectile-pyenv-mode-set ()
+;	  "Set pyenv version matching project name."
+;	  (let ((project (projectile-project-name)))
+;	    (if (member project (pyenv-mode-versions))
+;		(pyenv-mode-set project)
+;	      (pyenv-mode-unset))))
+;	(add-hook 'projectile-switch-project-hook 'projectile-pyenv-mode-set)
+;        ; disable the global mapping introduced by pyenv, since it conflicts with other modes such as org-agenda-scheduel
+;	(define-key pyenv-mode-map (kbd "C-c C-s") nil)))))
 
 
 (use-package elixir-mode
