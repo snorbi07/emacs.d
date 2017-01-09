@@ -36,6 +36,10 @@
 ;; disable window narrowing/widening message
 (put 'narrow-to-region 'disabled nil)
 
+;; Dired
+; to get the midnight commander experience!
+(setq dired-dwim-target t)
+
 ;; General key bindings
 (global-set-key [f11] 'toggle-frame-fullscreen)
 
