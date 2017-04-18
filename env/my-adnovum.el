@@ -12,5 +12,13 @@
   (let ((default-directory "/sram@adnvlhu003:"))
     (shell)))
 
+;; use git-bash on Windows
+(setq explicit-shell-file-name
+      "C:/Program Files/Git/bin/bash.exe")
+(setq shell-file-name explicit-shell-file-name)
+(add-to-list 'exec-path "C:/Program Files/Git/bin")
+(setq explicit-bash.exe-args '("--login" "-i"))
+
+
 (provide 'my-adnovum)
 ;;; my-adnovum.el ends here
