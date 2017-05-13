@@ -265,6 +265,11 @@
       :config (company-quickhelp-mode t))))
 
 
+;; Used for debugging purposes
+(use-package realgud
+  :ensure t)
+
+
 (use-package yasnippet
   :ensure t
   :commands (yas-minor-mode)
@@ -283,6 +288,15 @@
 (use-package elpy
   :ensure t
   :init (elpy-enable))
+
+;; Check that we have we have 'pdb' on PATH, since realgud tries to call that directly
+;; If it doesn't exist, try creating a bash script for it and adding it to the PATH:
+;;
+;; #!/bin/sh
+;; exec python -m pdb "$@"
+;;
+(unless (executable-find "pdb") (warn "'pdb' not found on $PATH, Python debugging won't work!"))
+
 
 ;; Anaconda based Python support, disabled because of elpy usage
 ;(use-package anaconda-mode
