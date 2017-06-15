@@ -360,6 +360,12 @@
       :init (add-hook 'elixir-mode-hook 'flycheck-mix-setup))))
 
 
+(use-package groovy-mode
+  :ensure t
+  :defer t
+  :init (add-to-list 'auto-mode-alist '("\\.gradle\\'" . groovy-mode)))
+
+
 ;; enable spell checking during coding as well, since I cannot spell properly anyways.
 ;; FIXME: disabled since it conflicts with C-M-i binding of company by default
 ;;(add-hook 'prog-mode-hook 'flyspell-prog-mode)
