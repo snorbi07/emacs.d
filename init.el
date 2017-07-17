@@ -250,6 +250,13 @@
   (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)))
 
 
+(use-package adoc-mode
+  :ensure t
+  :defer t
+  :init
+  (add-to-list 'auto-mode-alist '("\\.adoc\\'" . adoc-mode)))
+
+
 (use-package flycheck
   :ensure t
   :config (global-flycheck-mode))
