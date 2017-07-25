@@ -294,7 +294,8 @@
 ;; Python development setup
 (use-package elpy
   :ensure t
-  :init (elpy-enable))
+  :init (progn (elpy-enable)
+	       (add-hook 'python-mode-hook #'subword-mode)))
 
 ;; Check that we have we have 'pdb' on PATH, since realgud tries to call that directly
 ;; If it doesn't exist, try creating a bash script for it and adding it to the PATH:
