@@ -303,7 +303,7 @@
 ;; #!/bin/sh
 ;; exec python -m pdb "$@"
 ;;
-(unless (executable-find "pdb") (warn "'pdb' not found on $PATH, Python debugging won't work!"))
+(unless (executable-find "pdb") (message "'pdb' not found on $PATH, Python debugging won't work!"))
 
 
 ;; Anaconda based Python support, disabled because of elpy usage
