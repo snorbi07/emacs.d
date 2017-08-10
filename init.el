@@ -267,6 +267,7 @@
   :config
   (progn
     (add-hook 'prog-mode-hook 'global-company-mode)
+    (setq company-tooltip-align-annotations t)
     (use-package company-quickhelp
       :ensure t
       :config (company-quickhelp-mode t))))
@@ -373,6 +374,12 @@
   :defer t
   :init (add-to-list 'auto-mode-alist '("\\.gradle\\'" . groovy-mode)))
 
+
+(use-package tide
+  :ensure t
+  :defer t
+  :init (progn (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
+	       (add-hook 'typescript-mode-hook #'tide-setup)))
 
 ;; enable spell checking during coding as well, since I cannot spell properly anyways.
 ;; FIXME: disabled since it conflicts with C-M-i binding of company by default
