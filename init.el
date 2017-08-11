@@ -272,7 +272,9 @@
   :config
   (progn
     (add-hook 'prog-mode-hook 'global-company-mode)
-    (setq company-tooltip-align-annotations t)
+    (setq company-tooltip-align-annotations t
+	  company-idle-delay 0
+	  company-quickhelp-delay 0)
     (use-package company-quickhelp
       :ensure t
       :config (company-quickhelp-mode t))))
