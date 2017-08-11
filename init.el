@@ -188,7 +188,12 @@
     (require 'smartparens-config)
     (smartparens-global-strict-mode t)
     (sp-use-smartparens-bindings)
-    (smartparens-global-mode t)))
+    (smartparens-global-mode t)
+    (setq sp-highlight-pair-overlay nil)
+    (show-smartparens-global-mode t)
+    ;; Smart auto-line after a paratnheses pair: https://stackoverflow.com/questions/22107501/set-emacs-to-smart-auto-line-after-a-parentheses-pair
+    (sp-with-modes '(c-mode c++-mode typescript-mode javascript-mode js-mode)
+      (sp-local-pair "{" nil :post-handlers '(:add ("||\n[i]" "RET"))))))
 
 
 ;; emacs-which-key
