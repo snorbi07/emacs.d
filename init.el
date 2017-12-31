@@ -117,7 +117,6 @@
   (progn
     (require 'helm-config)
     (helm-adaptive-mode 1)
-    (helm-push-mark-mode 1)
     (helm-autoresize-mode 1)
     (helm-adaptive-mode 1)
     (helm-mode 1)
