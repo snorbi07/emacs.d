@@ -19,6 +19,11 @@
 (package-initialize)
 
 
+;; Define a new prefix key, which is used by my own shortcuts, otherwise we cannot bind a command to M-m M-m for example.
+(define-prefix-command 'my-keymap)
+(global-set-key (kbd "M-m") 'my-keymap)
+
+
 ;; Bootstrap `use-package'
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -60,32 +65,22 @@
 	    (sml/setup)
 	    (setq sml/theme 'dark)))
 
-
 (use-package avy
-  :ensure t)
+  :ensure t
+  :bind (("M-m M-m" . 'avy-goto-word-1)
+	 ("M-m M-c" . 'avy-goto-char)
+	 ("M-m M-l" . 'avy-goto-line)))
 
 
 (use-package imenu-anywhere
-  :ensure t)
+  :ensure t
+  :bind (("M-m m" . 'helm-imenu-anywhere)))
 
 
 (use-package undo-tree
   :ensure t
   :config
   (global-undo-tree-mode))
-
-
-(use-package key-chord
-  :ensure t
-  :after avy imenu-anywhere
-  :config
-  (progn
-    (setq key-chord-one-key-delay 0.20)
-    (key-chord-mode 1)
-    (key-chord-define-global "jj" 'avy-goto-char)
-    (key-chord-define-global "jw" 'avy-goto-word-1)
-    (key-chord-define-global "jl" 'avy-goto-line)
-    (key-chord-define-global "jz" 'helm-imenu-anywhere)))
 
 
 (use-package ace-window
