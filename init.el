@@ -180,7 +180,6 @@
   :config
   (progn
     (require 'smartparens-config)
-    (smartparens-global-strict-mode t)
     (sp-use-smartparens-bindings)
     (smartparens-global-mode t)
     (setq sp-highlight-pair-overlay nil)
