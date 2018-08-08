@@ -383,6 +383,25 @@
   :init (progn (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
 	       (add-hook 'typescript-mode-hook #'tide-setup)))
 
+
+;; Scala support (This assumes that SBT is on the path)
+(use-package ensime
+  :ensure t
+  :pin melpa
+  :config (setq ensime-search-interface 'helm
+		ensime-startup-notification nil))
+
+(use-package sbt-mode
+  :ensure t
+  :defer t
+  :pin melpa)
+
+(use-package scala-mode
+  :ensure t
+  :defer t
+  :pin melpa)
+
+
 ;; enable spell checking during coding as well, since I cannot spell properly anyways.
 ;; FIXME: disabled since it conflicts with C-M-i binding of company by default
 ;;(add-hook 'prog-mode-hook 'flyspell-prog-mode)
