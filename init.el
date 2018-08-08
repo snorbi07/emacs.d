@@ -74,7 +74,7 @@
 
 (use-package imenu-anywhere
   :ensure t
-  :bind (("M-m m" . 'helm-imenu-anywhere)))
+  :bind (("M-m m" . 'helm-imenu)))
 
 
 (use-package undo-tree
