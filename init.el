@@ -164,6 +164,7 @@
    ("C-h C-f" . helm-apropos)
    ("C-c i" . helm-imenu-in-all-buffers)
    ("M-g a" . helm-do-grep-ag)
+   ([remap switch-to-buffer] . helm-buffers-list)
    ([remap jump-to-register] . helm-register)
    ([remap list-buffers] . helm-buffers-list)
    ([remap dabbrev-expand] . helm-dabbrev)
