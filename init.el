@@ -124,6 +124,8 @@
 
     (use-package helm-swoop
       :ensure t
+      ;https://emacs.stackexchange.com/questions/28089/how-do-i-make-helm-swoop-not-default-the-search-to-the-word-at-point
+      :config (setq helm-swoop-pre-input-function (lambda () ""))
       :bind (("C-s" . helm-swoop)))
 
     ;; used by projectile
