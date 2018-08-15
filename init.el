@@ -403,6 +403,12 @@
   :pin melpa)
 
 
+(use-package protobuf-mode
+  :ensure t
+  :defer t
+  :config (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode)))
+
+
 ;; enable spell checking during coding as well, since I cannot spell properly anyways.
 ;; FIXME: disabled since it conflicts with C-M-i binding of company by default
 ;;(add-hook 'prog-mode-hook 'flyspell-prog-mode)
