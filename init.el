@@ -268,6 +268,9 @@
   :config
   (progn
     (add-hook 'prog-mode-hook 'global-company-mode)
+    ; enable the C- based navigation in tha auto-complente popup
+    (define-key company-active-map (kbd "C-n") 'company-select-next-or-abort)
+    (define-key company-active-map (kbd "C-p") 'company-select-previous-or-abort)
     (setq company-tooltip-align-annotations t
 	  company-idle-delay 0
 	  company-quickhelp-delay 0)
