@@ -277,7 +277,8 @@
     (define-key company-active-map (kbd "C-p") 'company-select-previous-or-abort)
     (setq company-tooltip-align-annotations t
 	  company-idle-delay 0
-	  company-quickhelp-delay 0)
+	  company-quickhelp-delay 0
+	  company-dabbrev-downcase nil)
     (use-package company-quickhelp
       :ensure t
       :config (company-quickhelp-mode t))))
