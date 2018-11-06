@@ -327,12 +327,6 @@
   :config (yas-reload-all))
 
 
-;; Java development setup
-(use-package meghanada
-  :ensure t
-  :init (add-hook 'java-mode-hook (lambda () (meghanada-mode t))))
-
-
 ;; Python development setup
 (use-package elpy
   :ensure t
