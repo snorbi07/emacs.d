@@ -417,6 +417,29 @@
 	       (add-hook 'typescript-mode-hook #'tide-setup)))
 
 
+;; JavaScript support and related configuration
+(use-package js2-mode
+  :ensure t
+  :defer t
+  :after (company flycheck)
+  :config
+  (progn
+    (use-package js2-refactor
+      :ensure t
+      :config (add-hook 'js2-mode-hook #'js2-refactor-mode)
+      :init (js2r-add-keybindings-with-prefix "C-c C-m"))
+    (use-package tern
+      :ensure t)
+    (use-package company-tern
+      :ensure t
+      :config (progn
+		(add-hook 'js2-mode-hook 'company-mode)
+		(add-hook 'js2-mode-hook (lambda () (tern-mode t)))
+		(add-to-list 'company-backends 'company-tern))))
+  :init (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+  )
+
+
 ;; Scala support (This assumes that SBT is on the path)
 (use-package ensime
   :ensure t
