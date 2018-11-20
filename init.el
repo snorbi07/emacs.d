@@ -430,12 +430,19 @@
       :init (js2r-add-keybindings-with-prefix "C-c C-m"))
     (use-package tern
       :ensure t)
+    ;; this also assumes that 'tern' is accessible on PATH.
+    ;; If tern is installed through NVM, this might not be the case.
     (use-package company-tern
       :ensure t
       :config (progn
 		(add-hook 'js2-mode-hook 'company-mode)
 		(add-hook 'js2-mode-hook (lambda () (tern-mode t)))
-		(add-to-list 'company-backends 'company-tern))))
+		(add-to-list 'company-backends 'company-tern)))
+    ;; override indentation for JavaScript/JSON
+    (defun my-js-indentation-hook ()
+      (setq js-indent-level 2))
+    (add-hook 'js2-mode-hook 'my-js-indentation-hook)
+    (add-hook 'json-mode-hook 'my-js-indentation-hook))
   :init (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
   )
 
