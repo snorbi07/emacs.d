@@ -48,8 +48,11 @@
 (scroll-bar-mode -1)
 
 (use-package idea-darkula-theme
+  :ensure t)
+
+(use-package zenburn-theme
   :ensure t
-  :init (load-theme 'idea-darkula t))
+  :init (load-theme 'zenburn t))
 
 ;; Default font setting
 (add-to-list 'default-frame-alist
