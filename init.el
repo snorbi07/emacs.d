@@ -413,12 +413,23 @@
   :init (add-to-list 'auto-mode-alist '("\\.gradle\\'" . groovy-mode)))
 
 
+;; TypeScript support and configuration
 (use-package tide
   :ensure t
   :defer t
-  :init (progn (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
-	       (add-hook 'typescript-mode-hook #'tide-setup)))
-
+  :after (company flycheck)
+  :config (progn (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
+	       (tide-setup)
+	       (flycheck-mode t)
+	       (setq flycheck-check-syntax-automatically '(save mode-enabled))
+	       (flycheck-add-next-checker 'typescript-tide '(t . typescript-tslint) 'append)
+	       (flycheck-add-mode 'typescript-tslint 'web-mode)
+	       (eldoc-mode t)
+	       (tide-hl-identifier-mode t)
+	       (company-mode t)
+	       (setq typescript-indent-level 2)
+	       (add-hook 'before-save-hook 'tide-format-before-save))
+  :init (progn (add-hook 'typescript-mode-hook #'tide-setup)))
 
 ;; JavaScript support and related configuration
 (use-package js2-mode
