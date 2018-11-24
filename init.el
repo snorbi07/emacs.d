@@ -441,10 +441,16 @@
     ;; override indentation for JavaScript/JSON
     (defun my-js-indentation-hook ()
       (setq js-indent-level 2))
-    (add-hook 'js2-mode-hook 'my-js-indentation-hook)
-    (add-hook 'json-mode-hook 'my-js-indentation-hook))
+    (add-hook 'js2-mode-hook 'my-js-indentation-hook))
   :init (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
   )
+
+
+;; JSON mode configuration
+;; This here, seperatelly from JS/TS since it is possible to open a JSON file without triggering the other 2 modes.
+(use-package json-mode
+  :defer t
+  :config (setq js-indent-level 2))
 
 
 ;; Support for various template formats
