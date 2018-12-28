@@ -114,6 +114,11 @@
   :bind (("M-m m" . 'helm-imenu)))
 
 
+(use-package eyebrowse
+  :ensure t
+  :config (eyebrowse-mode t))
+
+
 (use-package undo-tree
   :ensure t
   :config
