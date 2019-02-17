@@ -24,6 +24,15 @@
 (define-prefix-command 'my-keymap)
 (global-set-key (kbd "M-m") 'my-keymap)
 
+;; Change the annoying behavior of "C-z"/suspend...
+(global-unset-key (kbd "C-z"))
+(global-set-key (kbd "C-z C-z") 'my-suspend-frame)
+(defun my-suspend-frame ()
+  "In a GUI environment, do nothing; otherwise `suspend-frame'."
+  (interactive)
+  (if (display-graphic-p)
+      (message "suspend-frame disabled for graphical displays.")
+    (suspend-frame)))
 
 ;; Bootstrap `use-package'
 (unless (package-installed-p 'use-package)
