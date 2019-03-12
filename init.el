@@ -262,15 +262,7 @@
     (setq projectile-enable-caching t
 	  projectile-completion-system 'helm)
     (projectile-global-mode)
-    (helm-projectile-on)
-    
-    (use-package neotree
-      :ensure t
-      :config
-      (setq projectile-switch-project-action 'neotree-projectile-action
-	    neo-smart-open t)
-      :bind
-      ([f8] . neotree-toggle))))
+    (helm-projectile-on)))
 
 
 (use-package magit
@@ -528,6 +520,79 @@
   :defer t
   :config (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode)))
 
+
+(use-package treemacs
+  :ensure t
+  :defer t
+  :config
+  (progn
+    (setq treemacs-collapse-dirs                 (if (executable-find "python") 3 0)
+          treemacs-deferred-git-apply-delay      0.5
+	  ;; set to nil, otherwise does not work properly with my current setup
+          treemacs-display-in-side-window        nil
+          treemacs-file-event-delay              5000
+          treemacs-file-follow-delay             0.1
+          treemacs-follow-after-init             t
+          treemacs-git-command-pipe              ""
+          treemacs-goto-tag-strategy             'refetch-index
+          treemacs-indentation                   2
+          treemacs-indentation-string            " "
+          treemacs-is-never-other-window         t
+          treemacs-max-git-entries               5000
+          treemacs-no-png-images                 nil
+          treemacs-no-delete-other-windows       t
+          treemacs-project-follow-cleanup        nil
+          treemacs-persist-file                  (expand-file-name ".cache/treemacs-persist" user-emacs-directory)
+          treemacs-recenter-distance             0.1
+          treemacs-recenter-after-file-follow    nil
+          treemacs-recenter-after-tag-follow     nil
+          treemacs-recenter-after-project-jump   'always
+          treemacs-recenter-after-project-expand 'on-distance
+          treemacs-show-cursor                   nil
+          treemacs-show-hidden-files             t
+          treemacs-silent-filewatch              nil
+          treemacs-silent-refresh                nil
+          treemacs-sorting                       'alphabetic-desc
+          treemacs-space-between-root-nodes      t
+          treemacs-tag-follow-cleanup            t
+          treemacs-tag-follow-delay              1.5
+          treemacs-width                         35)
+
+    ;; The default width and height of the icons is 22 pixels. If you are
+    ;; using a Hi-DPI display, uncomment this to double the icon size.
+    ;;(treemacs-resize-icons 44)
+
+    (treemacs-follow-mode t)
+    (treemacs-filewatch-mode t)
+    (treemacs-fringe-indicator-mode t)
+    (pcase (cons (not (null (executable-find "git")))
+                 (not (null (executable-find "python3"))))
+      (`(t . t)
+       (treemacs-git-mode 'deferred))
+      (`(t . _)
+       (treemacs-git-mode 'simple))))
+  :bind
+  (:map global-map
+        ("M-0"       . treemacs-select-window)
+        ("M-m t t"   . treemacs)))
+
+(use-package treemacs-projectile
+  :after treemacs projectile
+  :ensure t)
+
+(use-package treemacs-icons-dired
+  :after treemacs dired
+  :ensure t
+  :config (treemacs-icons-dired-mode))
+
+(use-package treemacs-magit
+  :after treemacs magit
+  :ensure t)
+
+;; needed to ensure that swoop/helm works with treemacs... sort of.
+(use-package shackle
+  :ensure t
+  :config (setq shackle-default-rule '(:same t)))
 
 ;; enable spell checking during coding as well, since I cannot spell properly anyways.
 ;; FIXME: disabled since it conflicts with C-M-i binding of company by default

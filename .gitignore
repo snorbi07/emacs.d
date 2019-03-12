@@ -27,3 +27,6 @@ bookmarks
 
 # megahanda working folder
 meghanada/
+
+.cache/
+transient/
