@@ -420,6 +420,9 @@
 
 
 ;; TypeScript support and configuration
+;; Requires node to be on PATH. The setup also has some NPM package requirements as well:
+;; - typescript
+;; - typescript-formatter
 (use-package tide
   :ensure t
   :defer t
