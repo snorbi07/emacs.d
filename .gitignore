@@ -30,3 +30,6 @@ meghanada/
 
 .cache/
 transient/
+
+# LSP temp files
+.lsp-session-*

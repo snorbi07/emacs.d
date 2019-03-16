@@ -271,6 +271,24 @@
   :bind ("C-x g" . magit-status))
 
 
+(use-package lsp-mode
+  :ensure t
+  :commands lsp)
+
+(use-package lsp-ui
+  :after lsp-mode
+  :ensure t
+  :commands lsp-ui-mode
+  :config (progn
+	    (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+	    (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+	    (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)))
+
+(use-package company-lsp
+  :after lsp-mode
+  :ensure t
+  :commands company-lsp)
+
 (use-package highlight-symbol
   :ensure t
   :config
@@ -419,26 +437,15 @@
   :init (add-to-list 'auto-mode-alist '("\\.gradle\\'" . groovy-mode)))
 
 
-;; TypeScript support and configuration
-;; Requires node to be on PATH. The setup also has some NPM package requirements as well:
-;; - typescript
-;; - typescript-formatter
-(use-package tide
+;; Requires node to be on PATH. The setup also has some NPM package requirements as well, check:
+;; https://github.com/emacs-lsp/lsp-mode
+(use-package typescript-mode
   :ensure t
-  :defer t
-  :after (company flycheck)
-  :config (progn (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
-	       (tide-setup)
-	       (flycheck-mode t)
-	       (setq flycheck-check-syntax-automatically '(save mode-enabled))
-	       (flycheck-add-next-checker 'typescript-tide '(t . typescript-tslint) 'append)
-	       (flycheck-add-mode 'typescript-tslint 'web-mode)
-	       (eldoc-mode t)
-	       (tide-hl-identifier-mode t)
-	       (company-mode t)
-	       (setq typescript-indent-level 2)
-	       (add-hook 'before-save-hook 'tide-format-before-save))
-  :init (progn (add-hook 'typescript-mode-hook #'tide-setup)))
+  :config (progn
+	    (add-hook 'typescript-mode-hook #'lsp)
+	    (flycheck-add-mode 'typescript-tslint 'web-mode)
+	    (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))))
+
 
 ;; JavaScript support and related configuration
 (use-package js2-mode
