@@ -604,6 +604,14 @@
   :ensure t
   :config (setq shackle-default-rule '(:same t)))
 
+
+(use-package editorconfig
+  :ensure t
+  :config (progn
+	    (unless (executable-find "editorconfig") (message "'editorconfig' not found on $PATH, editorconfig won't work!"))
+	    (editorconfig-mode 1)))
+
+
 ;; enable spell checking during coding as well, since I cannot spell properly anyways.
 ;; FIXME: disabled since it conflicts with C-M-i binding of company by default
 ;;(add-hook 'prog-mode-hook 'flyspell-prog-mode)
