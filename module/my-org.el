@@ -21,6 +21,8 @@
 	    (setq org-agenda-files (list (concat my-org-folder-path "/gtd"))
 		  org-refile-use-outline-path t
 		  org-refile-targets  '((org-agenda-files :maxlevel . 3))
+		  org-log-into-drawer t ; task related notes should end up in the default LOGBOOK drawer
+		  org-clock-into-drawer "CLOCKING" ; by default clocking information would end up in the LOGBOOK as well
 		  org-default-notes-file my-org-notes-file-path
 		  org-capture-templates
 		  (quote (("t" "TODO" entry (file+headline my-org-notes-file-path "Captures") "* TODO %^{Todo description}")
