@@ -455,29 +455,34 @@
 (use-package js2-mode
   :ensure t
   :defer t
-  :after (company flycheck)
   :config
   (progn
-    (use-package js2-refactor
-      :ensure t
-      :config (add-hook 'js2-mode-hook #'js2-refactor-mode)
-      :init (js2r-add-keybindings-with-prefix "C-c C-m"))
     (use-package tern
       :ensure t)
-    ;; this also assumes that 'tern' is accessible on PATH.
-    ;; If tern is installed through NVM, this might not be the case.
     (use-package company-tern
       :ensure t
-      :config (progn
-		(add-hook 'js2-mode-hook 'company-mode)
-		(add-hook 'js2-mode-hook (lambda () (tern-mode t)))
-		(add-to-list 'company-backends 'company-tern)))
-    ;; override indentation for JavaScript/JSON
-    (defun my-js-indentation-hook ()
-      (setq js-indent-level 2))
-    (add-hook 'js2-mode-hook 'my-js-indentation-hook))
-  :init (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-  )
+      :config (add-to-list 'company-backends 'company-tern))
+    (add-hook 'js2-mode-hook #'tern-mode)
+    (add-hook 'js2-mode-hook #'company-mode))
+  :init (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
+
+
+(use-package rjsx-mode
+  :ensure t
+  :defer t
+  :config
+  (progn
+    (use-package tern
+      :ensure t)
+    (use-package company-tern
+      :ensure t
+      :config (add-to-list 'company-backends 'company-tern))
+    ;; Turn off js2 mode errors & warnings (use eslint/standard/... instead through flycheck)
+    ;;(setq js2-mode-show-parse-errors nil
+    ;;      js2-mode-show-strict-warnings nil)
+    (add-hook 'rjsx-mode-hook #'tern-mode)
+    (add-hook 'rjsx-mode-hook #'company-mode))
+  :init (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode)))
 
 
 ;; JSON mode configuration
@@ -500,6 +505,8 @@
 	    web-mode-css-indent-offset 2
 	    web-mode-code-indent-offset 2))
     (add-hook 'web-mode-hook  'my-web-mode-hook)
+    ;; use eslint with web-mode for jsx files
+    (flycheck-add-mode 'javascript-eslint 'web-mode)
     ;; add hooks for everything!
     (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
     (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
