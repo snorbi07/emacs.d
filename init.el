@@ -448,7 +448,6 @@
   :ensure t
   :config (progn
 	    (add-hook 'typescript-mode-hook #'lsp)
-	    (flycheck-add-mode 'typescript-tslint 'web-mode)
 	    (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))))
 
 
