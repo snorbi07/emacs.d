@@ -84,6 +84,10 @@
 (setq initial-major-mode 'text-mode)
 ;; disable window narrowing/widening message
 (put 'narrow-to-region 'disabled nil)
+;; TRAMP
+;; make the default method ssh instead of scp
+(set-default 'tramp-default-method "ssh")
+
 
 ;; Dired
 ;; to get the midnight commander experience!
