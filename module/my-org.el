@@ -26,6 +26,7 @@
 		  org-default-notes-file my-org-notes-file-path
 		  org-capture-templates
 		  (quote (("t" "TODO" entry (file+headline my-org-notes-file-path "Captures") "* TODO %^{Todo description}")
+			  ("n" "NEXT" entry (file+headline my-org-notes-file-path "Captures") "* NEXT %^{Task description}")
 			  ("T" "TODO" entry (file+headline my-org-notes-file-path "Captures") "* TODO %^{Todo description}\n %? Added: %U %i %a"))))
 	    (use-package org-bullets
 	      :ensure t
