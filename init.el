@@ -359,6 +359,7 @@
 
 
 ;; Python development setup
+;; Don't forget to install the needed external dependencies: https://github.com/jorgenschaefer/elpy
 (use-package elpy
   :ensure t
   :init (progn (elpy-enable)
