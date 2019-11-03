@@ -277,7 +277,9 @@
 
 (use-package lsp-mode
   :ensure t
-  :commands lsp)
+  :commands lsp
+  ;; needed to ensure that lsp-ui flycheck checker gets loaded
+  :config (setq lsp-prefer-flymake nil))
 
 (use-package lsp-ui
   :after lsp-mode
