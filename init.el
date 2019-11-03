@@ -282,9 +282,7 @@
   :config (setq lsp-prefer-flymake nil))
 
 (use-package lsp-ui
-  :after lsp-mode
   :ensure t
-  :commands lsp-ui-mode
   :config (progn
 	    (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 	    (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
@@ -450,6 +448,7 @@
   :ensure t
   :config (progn
 	    (add-hook 'typescript-mode-hook #'lsp)
+	    (add-hook 'lsp-mode-hook (lambda () (flycheck-add-next-checker 'lsp-ui '(t . javascript-eslint))))
 	    (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))))
 
 
