@@ -132,6 +132,10 @@
   :config (eyebrowse-mode t))
 
 
+(use-package winner
+  :config (winner-mode t))
+
+
 (use-package undo-tree
   :ensure t
   :config
