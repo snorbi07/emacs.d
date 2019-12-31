@@ -446,14 +446,20 @@
   :init (add-to-list 'auto-mode-alist '("\\.gradle\\'" . groovy-mode)))
 
 
-;; Requires node to be on PATH. The setup also has some NPM package requirements as well, check:
-;; https://github.com/emacs-lsp/lsp-mode
 (use-package typescript-mode
   :ensure t
-  :config (progn
-	    (add-hook 'typescript-mode-hook #'lsp)
-	    (add-hook 'lsp-mode-hook (lambda () (flycheck-add-next-checker 'lsp-ui '(t . javascript-eslint))))
-	    (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))))
+  :defer t
+  :after (company flycheck)
+  :config (progn (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
+		 (use-package tide
+		   :ensure t)
+		 (tide-setup)
+		 (flycheck-mode t)
+		 (flycheck-add-next-checker 'typescript-tide '(t . javascript-eslint))
+		 (eldoc-mode t)
+		 (tide-hl-identifier-mode t)
+		 (company-mode t))
+  :init (progn (add-hook 'typescript-mode-hook #'tide-setup)))
 
 
 ;; JavaScript support and related configuration
