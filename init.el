@@ -55,13 +55,17 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
+(setq custom-safe-themes t)
 
 (use-package idea-darkula-theme
   :ensure t)
 
 (use-package zenburn-theme
+  :ensure t)
+
+(use-package material-theme
   :ensure t
-  :init (load-theme 'zenburn t))
+  :init (load-theme 'material))
 
 ;; Default font setting
 (add-to-list 'default-frame-alist
@@ -292,10 +296,10 @@
 	    (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
 	    (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)))
 
-(use-package company-lsp
-  :after lsp-mode
-  :ensure t
-  :commands company-lsp)
+;(use-package company-lsp
+;  :after lsp-mode
+;  :ensure t
+;  :commands company-lsp)
 
 (use-package highlight-symbol
   :ensure t
@@ -529,13 +533,6 @@
   )
 
 
-;; Scala support (This assumes that SBT is on the path)
-(use-package ensime
-  :ensure t
-  :pin melpa
-  :config (setq ensime-search-interface 'helm
-		ensime-startup-notification nil))
-
 (use-package sbt-mode
   :ensure t
   :defer t
@@ -646,3 +643,17 @@
   :load-path "module/")
 
 ;;; init.el ends here
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(delete-selection-mode nil)
+ '(package-selected-packages
+   '(material-theme company-tern tern org-bullets editorconfig shackle treemacs-magit treemacs-icons-dired treemacs-projectile treemacs protobuf-mode scala-mode sbt-mode ensime web-mode rjsx-mode js2-mode typescript-mode groovy-mode elixir-mode elpy yasnippet realgud company-quickhelp company flycheck adoc-mode highlight-symbol company-lsp lsp-ui lsp-mode magit which-key smartparens expand-region helm-projectile ag helm-ag helm-swoop helm-descbinds helm yaml-mode paredit ace-window undo-tree eyebrowse imenu-anywhere avy smart-mode-line crux zenburn-theme idea-darkula-theme use-package)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
