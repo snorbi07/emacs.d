@@ -170,7 +170,6 @@
 
 (use-package helm
   :ensure t
-  :defer t
   :config
   (progn
     (require 'helm-config)
