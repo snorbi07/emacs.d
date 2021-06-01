@@ -502,7 +502,9 @@
 ;; JSON mode configuration
 ;; This here, seperatelly from JS/TS since it is possible to open a JSON file without triggering the other 2 modes.
 (use-package json-mode
+  :ensure t
   :defer t
+  :mode "\\.json\\'"
   :config (setq js-indent-level 2))
 
 
