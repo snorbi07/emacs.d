@@ -284,21 +284,28 @@
 
 (use-package lsp-mode
   :ensure t
-  :commands lsp
-  ;; needed to ensure that lsp-ui flycheck checker gets loaded
-  :config (setq lsp-prefer-flymake nil))
+  :init
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "C-c l")
+  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+         (typescript-mode . lsp)
+	 (js2-mode . lsp)
+         ;; for which-key integration
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
 
 (use-package lsp-ui
   :ensure t
-  :config (progn
-	    (add-hook 'lsp-mode-hook 'lsp-ui-mode)
-	    (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-	    (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)))
+  :commands lsp-ui-mode)
 
-;(use-package company-lsp
-;  :after lsp-mode
-;  :ensure t
-;  :commands company-lsp)
+(use-package helm-lsp
+  :ensure t
+  :commands helm-lsp-workspace-symbol)
+
+(use-package lsp-treemacs
+  :ensure t
+  :commands lsp-treemacs-errors-list)
+
 
 (use-package highlight-symbol
   :ensure t
@@ -452,34 +459,13 @@
 (use-package typescript-mode
   :ensure t
   :defer t
-  :after (company flycheck)
-  :config (progn (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
-		 (use-package tide
-		   :ensure t)
-		 (tide-setup)
-		 (flycheck-mode t)
-		 (flycheck-add-next-checker 'typescript-tide '(t . javascript-eslint))
-		 (eldoc-mode t)
-		 (tide-hl-identifier-mode t)
-		 (company-mode t))
-  :init (progn (add-hook 'typescript-mode-hook #'tide-setup)))
-
+  :config (progn (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))))
 
 ;; JavaScript support and related configuration
 (use-package js2-mode
   :ensure t
   :defer t
-  :config
-  (progn
-    (use-package tern
-      :ensure t)
-    (use-package company-tern
-      :ensure t
-      :config (add-to-list 'company-backends 'company-tern))
-    (add-hook 'js2-mode-hook #'tern-mode)
-    (add-hook 'js2-mode-hook #'company-mode))
   :init (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
-
 
 (use-package rjsx-mode
   :ensure t
