@@ -290,6 +290,7 @@
   :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
          (typescript-mode . lsp)
 	 (js2-mode . lsp)
+	 (scala-mode . lsp)
          ;; for which-key integration
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp)
@@ -297,6 +298,9 @@
 (use-package lsp-ui
   :ensure t
   :commands lsp-ui-mode)
+
+(use-package lsp-metals
+  :ensure t)
 
 (use-package helm-lsp
   :ensure t
@@ -522,13 +526,11 @@
 
 (use-package sbt-mode
   :ensure t
-  :defer t
-  :pin melpa)
+  :defer t)
 
 (use-package scala-mode
   :ensure t
-  :defer t
-  :pin melpa)
+  :defer t)
 
 
 (use-package protobuf-mode
