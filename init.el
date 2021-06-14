@@ -618,6 +618,16 @@
 	    (editorconfig-mode 1)))
 
 
+(use-package dockerfile-mode
+  :ensure t
+  :defer t
+  :mode "Dockerfile\\'")
+
+
+(use-package docker-tramp
+  :ensure t
+  :defer t)
+
 ;; enable spell checking during coding as well, since I cannot spell properly anyways.
 ;; FIXME: disabled since it conflicts with C-M-i binding of company by default
 ;;(add-hook 'prog-mode-hook 'flyspell-prog-mode)
