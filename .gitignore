@@ -33,3 +33,12 @@ transient/
 
 # LSP temp files
 .lsp-session-*
+
+/.cache/
+/eln-cache/
+/elpa/
+/history
+/transient/
+/auto-save-list/
+/eshell/
+/projects
