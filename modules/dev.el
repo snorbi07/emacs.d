@@ -17,10 +17,12 @@
           (json-mode . json-ts-mode)
           (css-mode . css-ts-mode)
           (python-mode . python-ts-mode)
-	  (rust-mode . rust-ts-mode)))
+	  (rust-mode . rust-ts-mode)
+	  (elixir-mode . elixir-ts-mode)))
   :hook
   ;; Auto parenthesis matching
   ((prog-mode . electric-pair-mode)))
+
 
 ;; Helps you find the necessary treesit modules
 (use-package treesit-auto
@@ -144,7 +146,8 @@
   ;; Configure hooks to automatically turn-on eglot for selected modes
   :hook
   ((python-ts-mode . eglot-ensure)
-   (rust-ts-mode . eglot-ensure))
+   (rust-ts-mode . eglot-ensure)
+   (elixir-ts-mode . eglot-ensure))
   :custom
   (eglot-send-changes-idle-time 0.1)
   (eglot-extend-to-xref t)              ; activate Eglot in referenced non-project files
@@ -154,7 +157,7 @@
   (add-to-list 'eglot-server-programs
                '((rust-ts-mode rust-mode) .
 		 ("rust-analyzer" :initializationOptions (:check (:command "clippy")))))
-  )
+  (add-to-list 'eglot-server-programs '(elixir-ts-mode "/home/snorbi/dev/elixir-ls/language_server.sh")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -192,4 +195,42 @@
   :ensure t
   :config
   (add-hook 'python-ts-mode-hook 'pet-mode -10))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;;   Elixir development
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; IMPORTANT: Assumes that https://github.com/elixir-lsp/elixir-ls is installed.
+
+;; Ensure elixir-ts-mode has priority over older elixir-mode
+(setq auto-mode-alist
+      (append '(("\\.exs\\'" . elixir-ts-mode))
+              auto-mode-alist))
+
+(add-hook 'elixir-ts-mode-hook
+          (lambda () (add-hook 'before-save-hook #'eglot-format-buffer -10 t)))
+
+;; Run mix commands from Emacs
+(use-package mix
+  :ensure t
+  :config
+  (add-hook 'elixir-ts-mode-hook 'mix-minor-mode))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;;   Javascript development
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; IMPORTANT: assums that the TS language server is available on path:
+;npm install -g typescript-language-server typescript
+
+(use-package js-mode
+  :ensure nil
+  :hook ((js-mode . subword-mode)
+         (js-mode . electric-pair-mode)
+         (js-mode . eglot-ensure)
+         (js-mode . completion-preview-mode)))
 

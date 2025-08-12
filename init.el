@@ -22,8 +22,6 @@
 ; (setopt auto-revert-check-vc-info t)
 ; (global-auto-revert-mode)
 
-;; Set font size
-(set-face-attribute 'default nil :height 110)
 ;; Save history of minibuffer
 (savehist-mode)
 ;; Fix archaic defaults
@@ -36,6 +34,9 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 ;; Disable annoying "beep" sound
 (setopt visible-bell t)
+;; To make sure that symlinks don't cause issues
+(setq find-file-visit-truename t)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -140,13 +141,17 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;;   Theme
+;;;   Theme and Font
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package zenburn-theme
+(use-package doom-themes
   :ensure t
-  :init (load-theme 'zenburn t))
+  :init (load-theme 'doom-dracula t))
+
+(set-face-attribute 'default nil
+    :font "JetBrains Mono"
+    :height 120) ;; height is in 1/10pt, so 120 means 12pt
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -175,10 +180,26 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("18cf5d20a45ea1dff2e2ffd6fbcd15082f9aa9705011a3929e77129a971d1cb3" default))
+   '("4d5d11bfef87416d85673947e3ca3d3d5d985ad57b02a7bb2e32beaf785a100e"
+     "7771c8496c10162220af0ca7b7e61459cb42d18c35ce272a63461c0fc1336015"
+     "77fff78cc13a2ff41ad0a8ba2f09e8efd3c7e16be20725606c095f9a19c24d3d"
+     "d97ac0baa0b67be4f7523795621ea5096939a47e8b46378f79e78846e0e4ad3d"
+     "3061706fa92759264751c64950df09b285e3a2d3a9db771e99bcbb2f9b470037"
+     "8d3ef5ff6273f2a552152c7febc40eabca26bae05bd12bc85062e2dc224cde9a"
+     "fffef514346b2a43900e1c7ea2bc7d84cbdd4aa66c1b51946aade4b8d343b55a"
+     "088cd6f894494ac3d4ff67b794467c2aa1e3713453805b93a8bcb2d72a0d1b53"
+     "8c7e832be864674c220f9a9361c851917a93f921fedb7717b1b5ece47690c098"
+     "fd22a3aac273624858a4184079b7134fb4e97104d1627cb2b488821be765ff17"
+     "014cb63097fc7dbda3edf53eb09802237961cbb4c9e9abd705f23b86511b0a69"
+     "0325a6b5eea7e5febae709dab35ec8648908af12cf2d2b569bedc8da0a3a81c1"
+     "18cf5d20a45ea1dff2e2ffd6fbcd15082f9aa9705011a3929e77129a971d1cb3"
+     default))
  '(delete-selection-mode nil)
  '(package-selected-packages
-   '(elixir-ts-mode rust-mode treemacs lsp-ui pet treesit-auto zenburn-theme yaml-mode which-key wgrep vertico tree-sitter-langs orderless marginalia magit kind-icon json-mode expand-region embark-consult dockerfile-mode corfu-terminal cape avy)))
+   '(cape corfu-terminal doom-themes embark-consult expand-region js-mode
+	  json-mode kind-icon magit marginalia mix orderless pet
+	  rust-mode treemacs treesit-auto vertico wgrep yaml-mode
+	  zenburn-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
