@@ -17,7 +17,7 @@
           (json-mode . json-ts-mode)
           (css-mode . css-ts-mode)
           (python-mode . python-ts-mode)
-	  (rust-mode . rust-ts-mode)
+;	  (rust-mode . rust-ts-mode)
 	  (elixir-mode . elixir-ts-mode)))
   :hook
   ;; Auto parenthesis matching
@@ -146,7 +146,7 @@
   ;; Configure hooks to automatically turn-on eglot for selected modes
   :hook
   ((python-ts-mode . eglot-ensure)
-   (rust-ts-mode . eglot-ensure)
+   ;(rust-ts-mode . eglot-ensure)
    (elixir-ts-mode . eglot-ensure))
   :custom
   (eglot-send-changes-idle-time 0.1)
@@ -157,7 +157,9 @@
   (add-to-list 'eglot-server-programs
                '((rust-ts-mode rust-mode) .
 		 ("rust-analyzer" :initializationOptions (:check (:command "clippy")))))
-  (add-to-list 'eglot-server-programs '(elixir-ts-mode "/home/snorbi/dev/elixir-ls/language_server.sh")))
+  (add-to-list 'eglot-server-programs '(elixir-ts-mode "/home/snorbi/dev/elixir-ls/language_server.sh"))
+  ; (add-to-list 'eglot-server-programs '(python-ts-mode . ("ruff" "server")))
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -166,22 +168,35 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; https://rust-analyzer.github.io/manual.html#emacs
-(use-package rust-mode
+;(use-package rust-mode
+;  :ensure t
+;  :init
+;  (setq rust-mode-treesitter-derive t)
+;  (setq rust-format-on-save t)
+;;  :config
+;;  (define-key rust-ts-mode-map (kbd "C-c C-c C-r") #'rust-run)
+;  :bind
+;  (:map rust-ts-mode-map
+;	("C-c C-c C-r" . #'rust-run)
+;	("C-c C-c C-u" . #'rust-compile)
+;	("C-c C-c C-k" . #'rust-check)
+;	("C-c C-c C-t" . #'rust-test)
+;	("C-c C-c C-l" . #'rust-run-clippy)
+;	("C-c C-c C-d" . #'rust-dbg-wrap-or-unwrap)
+;	))
+					;
+
+(use-package rustic
   :ensure t
-  :init
-  (setq rust-mode-treesitter-derive t)
-  (setq rust-format-on-save t)
-;  :config
-;  (define-key rust-ts-mode-map (kbd "C-c C-c C-r") #'rust-run)
-  :bind
-  (:map rust-ts-mode-map
-	("C-c C-c C-r" . #'rust-run)
-	("C-c C-c C-u" . #'rust-compile)
-	("C-c C-c C-k" . #'rust-check)
-	("C-c C-c C-t" . #'rust-test)
-	("C-c C-c C-l" . #'rust-run-clippy)
-	("C-c C-c C-d" . #'rust-dbg-wrap-or-unwrap)
-	))
+  :config
+  (setq rustic-format-on-save t
+	lsp-rust-analyzer-server-display-inlay-hints t
+	lsp-rust-analyzer-display-parameter-hints t
+	lsp-rust-analyzer-display-chaining-hints t
+	lsp-inlay-hint-enable t)
+
+  :custom
+  (rustic-cargo-use-last-stored-arguments t))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -189,12 +204,27 @@
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Make sure to install in Python venv/projects:
+;; https://docs.basedpyright.com/
+;; https://docs.astral.sh/ruff/
+
 ;; Python development venv and friends handling
 ;; https://github.com/wyuenho/emacs-pet
 (use-package pet
   :ensure t
   :config
   (add-hook 'python-ts-mode-hook 'pet-mode -10))
+
+(use-package flymake-ruff
+  :ensure t
+  :hook
+  (python-ts-mode . flymake-ruff-load)
+  (python-mode . flymake-ruff-load))
+
+(use-package ruff-format
+  :ensure t
+  :hook
+  (python-ts-mode . ruff-format-on-save-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
