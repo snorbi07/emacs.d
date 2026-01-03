@@ -109,11 +109,13 @@
 ;; Define a new prefix key, which is used by my own shortcuts, otherwise we cannot bind a command to M-m M-m for example.
 (define-prefix-command 'my-keymap)
 (global-set-key (kbd "M-m") 'my-keymap)
+(global-set-key (kbd "M-o") 'ace-window)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;;   Tab-bar configuration
+
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -150,7 +152,7 @@
   :init (load-theme 'doom-dracula t))
 
 (set-face-attribute 'default nil
-    :font "JetBrains Mono"
+    :font "Ubuntu Mono"
     :height 120) ;; height is in 1/10pt, so 120 means 12pt
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -179,8 +181,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(blink-cursor-mode nil)
+ '(column-number-mode t)
  '(custom-safe-themes
-   '("4d5d11bfef87416d85673947e3ca3d3d5d985ad57b02a7bb2e32beaf785a100e"
+   '("7de64ff2bb2f94d7679a7e9019e23c3bf1a6a04ba54341c36e7cf2d2e56e2bcc"
+     "aec7b55f2a13307a55517fdf08438863d694550565dee23181d2ebd973ebd6b8"
+     "09b833239444ac3230f591e35e3c28a4d78f1556b107bafe0eb32b5977204d93"
+     "4d5d11bfef87416d85673947e3ca3d3d5d985ad57b02a7bb2e32beaf785a100e"
      "7771c8496c10162220af0ca7b7e61459cb42d18c35ce272a63461c0fc1336015"
      "77fff78cc13a2ff41ad0a8ba2f09e8efd3c7e16be20725606c095f9a19c24d3d"
      "d97ac0baa0b67be4f7523795621ea5096939a47e8b46378f79e78846e0e4ad3d"
@@ -196,10 +203,12 @@
      default))
  '(delete-selection-mode nil)
  '(package-selected-packages
-   '(cape corfu-terminal doom-themes embark-consult expand-region js-mode
-	  json-mode kind-icon magit marginalia mix orderless pet
-	  rust-mode treemacs treesit-auto vertico wgrep yaml-mode
-	  zenburn-theme)))
+   '(cape corfu-terminal doom-themes embark-consult expand-region
+	  flymake-ruff gptel json-mode kind-icon lsp-mode magit
+	  marginalia mix orderless pet ruff-format rust-mode rustic
+	  treemacs treesit-auto vertico wgrep yaml-mode zenburn-theme))
+ '(tab-bar-mode t)
+ '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
