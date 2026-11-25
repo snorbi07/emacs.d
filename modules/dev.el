@@ -23,7 +23,7 @@
 	  (elixir-mode . elixir-ts-mode)))
   :hook
   ;; Auto parenthesis matching
-  ((prog-mode . electric-pair-mode)))
+  ((prog-mode . electric-pair-local-mode)))
 
 
 ;; Helps you find the necessary treesit modules
@@ -241,8 +241,19 @@
       (append '(("\\.exs\\'" . elixir-ts-mode))
               auto-mode-alist))
 
+(defun my/elixir-format-on-save ()
+  "Format the buffer when its Eglot server supports formatting."
+  (when (and (featurep 'eglot)
+             (eglot-managed-p)
+             (eglot-current-server)
+             ;; Emacs 29's bundled Eglot used the internal name.
+             (if (fboundp 'eglot-server-capable)
+                 (eglot-server-capable :documentFormattingProvider)
+               (eglot--server-capable :documentFormattingProvider)))
+    (eglot-format-buffer)))
+
 (add-hook 'elixir-ts-mode-hook
-          (lambda () (add-hook 'before-save-hook #'eglot-format-buffer -10 t)))
+          (lambda () (add-hook 'before-save-hook #'my/elixir-format-on-save -10 t)))
 
 ;; Run mix commands from Emacs
 (use-package mix
@@ -262,7 +273,6 @@
 (use-package js-mode
   :ensure nil
   :hook ((js-mode . subword-mode)
-         (js-mode . electric-pair-mode)
          (js-mode . eglot-ensure)
          (js-mode . completion-preview-mode)))
 

@@ -71,19 +71,9 @@
            "** TODO %?\n%U\n%i\n%a")
 	  ;; Define Work section
           ("w" "Work")
-          ("wc" "GG Company Mgm." entry (file+headline "ggdev.org" "PROJECT GG Company Management")
+          ("wc" "GG" entry (file+headline "ggdev.org" "PROJECT GG")
            "** TODO %?\n%U\n%i\n%a")
 	  ("wd" "DGate" entry (file+headline "ggdev.org" "PROJECT DGate")
-           "** TODO %?\n%U\n%i\n%a")
-	  ("wi" "IndaPlay" entry (file+headline "ggdev.org" "PROJECT IndaPlay")
-           "** TODO %?\n%U\n%i\n%a")
-	  ("wm" "Manis" entry (file+headline "ggdev.org" "PROJECT Manis")
-           "** TODO %?\n%U\n%i\n%a")
-	  ("wa" "Axis" entry (file+headline "ggdev.org" "PROJECT Axis")
-           "** TODO %?\n%U\n%i\n%a")
-	  ("wg" "GroupM" entry (file+headline "ggdev.org" "PROJECT GroupM")
-           "** TODO %?\n%U\n%i\n%a")
-	  ("wx" "GG Day-to-day" entry (file+headline "ggdev.org" "PROJECT Day-to-day")
            "** TODO %?\n%U\n%i\n%a")
 	  ))
 
@@ -92,5 +82,5 @@
            ((agenda)
             (todo)))
           ("w" "Work" agenda ""
-           ((org-agenda-files '("work.org")))))))
+           ((org-agenda-files '("ggdev.org")))))))
 

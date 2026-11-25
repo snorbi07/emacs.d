@@ -205,7 +205,7 @@
      default))
  '(delete-selection-mode nil)
  '(package-selected-packages
-   '(cape corfu-terminal doom-themes embark-consult expand-region
+   '(cape doom-themes embark-consult expand-region
 	  flymake-ruff gptel json-mode kind-icon lsp-mode magit
 	  marginalia mix orderless pet ruff-format rust-mode rustic
 	  treemacs treesit-auto vertico wgrep yaml-mode zenburn-theme))
