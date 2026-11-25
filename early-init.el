@@ -1,3 +1,5 @@
+;;; early-init.el --- Early Emacs startup settings -*- lexical-binding: t; -*-
+
 ;; Startup speed, annoyance suppression
 (setq gc-cons-threshold 10000000)
 (setq byte-compile-warnings '(not obsolete))

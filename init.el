@@ -1,3 +1,5 @@
+;;; init.el --- Emacs configuration -*- lexical-binding: t; -*-
+
 (when (< emacs-major-version 29)
   (error (format "This config only works with Emacs 29 and newer; you have version ~a" emacs-major-version)))
 

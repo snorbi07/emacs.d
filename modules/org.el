@@ -1,3 +1,5 @@
+;;; org.el --- Org mode settings -*- lexical-binding: t; -*-
+
 ;; Agenda variables
 (setq org-directory "~/Documents/org/gtd/") ; Non-absolute paths for agenda and
                                         ; capture templates will look here.
